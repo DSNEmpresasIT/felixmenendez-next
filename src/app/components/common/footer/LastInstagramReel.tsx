@@ -1,5 +1,6 @@
+import { getLastInstagramReel } from '@/app/services/instagram-services';
 import React, { useEffect, useState } from 'react'
-import { getLastInstagramReel } from 'src/services/instagram-services'
+
 
 export const LastInstagramReel = ({ INSTAGRAM_TOKEN }: { INSTAGRAM_TOKEN: string }) => {
   const [ lastReel, setLastReel ] = useState<any>();

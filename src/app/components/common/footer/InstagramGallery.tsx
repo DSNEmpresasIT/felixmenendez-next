@@ -1,5 +1,6 @@
+import { getInstagramPhotos } from '@/app/services/instagram-services';
 import React, { useEffect, useState } from 'react'
-import { getInstagramPhotos } from 'src/services/instagram-services';
+
 
 export const InstagramGallery = ({ INSTAGRAM_TOKEN }: { INSTAGRAM_TOKEN: string }) => {
   const [instagramPhotos, setInstagramPhotos ] = useState<any>();
