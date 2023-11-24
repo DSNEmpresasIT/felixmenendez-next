@@ -1,7 +1,9 @@
-import { AccordionItem } from '@components/accordion/AccordionItem';
+
+import { db } from '@/app/util/catalogData';
+import { ProductTypes } from '@/app/util/types';
 import React from 'react';
-import { db } from 'src/util/catalogData';
-import { ProductData, ProductTypes } from 'src/util/types';
+import { AccordionItem } from '../accordion/AccordionItem';
+
 
 // CUANDO ES PRODUCTO: BOTONES DE DESCARGAS PDF
 

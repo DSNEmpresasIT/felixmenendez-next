@@ -1,5 +1,6 @@
+import { ProductData } from '@/app/util/types';
 import React, { Dispatch, FC, SetStateAction, useState } from 'react';
-import type { ProductData } from 'src/util/types';
+
 
 interface SearcherComponentProps {
   setProductData: Dispatch<SetStateAction<ProductData[]>>,

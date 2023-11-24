@@ -1,6 +1,7 @@
+import { getPlaceholder } from '@/app/util/getPlaceholder';
+import { PATH_ROUTES } from '@/app/util/pages';
 import React, { FC, useEffect, useState } from 'react';
-import { getPlaceholder } from 'src/util/getPlaceholder';
-import { PATH_ROUTES } from 'src/util/pages';
+;
 
 interface CardCartComponentProps {
   title: string;

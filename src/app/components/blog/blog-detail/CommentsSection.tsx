@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
-import { getFormatDate } from 'src/util/getDateFormat'
-import type { FacebookPostComments } from 'src/util/types'
+import { getFormatDate } from '@/app/util/getDateFormat'
+import type { FacebookPostComments } from '@/app/util/types'
 
 interface CommentsSectionProps {
   comments: FacebookPostComments[]

@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { CardCartComponent } from './CardCartComponent';
-import type { ProductData, ProductTypes } from 'src/util/types';
-import { db } from 'src/util/catalogData';
+import type { ProductData, ProductTypes } from '@/app/util/types';
+import { db } from '@/app/util/catalogData';
 import { SearcherComponent } from './SearcherComponent';
 import { ShopNavComponentNew } from './ShopNavComponentNew';
 import ReactPaginate from "react-paginate";

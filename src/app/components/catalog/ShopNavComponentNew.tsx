@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { db } from "src/util/catalogData";
-import { PATH_ROUTES } from "src/util/pages";
-import { ProductData, ProductTypes } from "src/util/types";
+import { db } from "@/app/util/catalogData";
+import { PATH_ROUTES } from "@/app/util/pages";
+import { ProductData, ProductTypes } from "@/app/util/types";
 
 const mainNavData = [
   {
