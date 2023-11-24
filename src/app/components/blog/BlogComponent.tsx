@@ -1,8 +1,8 @@
 import React from 'react'
-import { BlogContextProvider } from 'src/context/blog-context'
 import { BlogRouter } from './BlogRouter'
-import type { Keys } from 'src/util/types'
 import { BlogAsideSection } from './BlogAsideSection'
+import { Keys } from '@/app/util/types'
+import { BlogContextProvider } from '@/app/context/blog-context'
 
 export const BlogComponent = ({ keys }: { keys: Keys }) => {
   return (

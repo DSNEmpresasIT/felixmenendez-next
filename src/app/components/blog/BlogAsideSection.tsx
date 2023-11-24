@@ -1,10 +1,10 @@
+import { useBlogContext } from "@/app/context/blog-context";
+import { BlogTypes } from "@/app/context/types/blog";
+import { getInstagramVideos } from "@/app/services/instagram-services";
+import { getFormatDate } from "@/app/util/getDateFormat";
+import { FacebookPost, Keys } from "@/app/util/types";
 import React, { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
-import { useBlogContext } from "src/context/blog-context";
-import { BlogTypes } from "src/context/types/blog";
-import { getInstagramVideos } from "src/services/instagram-services";
-import { getFormatDate } from "src/util/getDateFormat";
-import type { FacebookPost, Keys } from "src/util/types";
 
 export const BlogAsideSection = ({ keys }: { keys: Keys }) => {
   const { state, dispatch }: any = useBlogContext();

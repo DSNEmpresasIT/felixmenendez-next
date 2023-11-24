@@ -1,8 +1,9 @@
 import React from "react";
-import { useBlogContext } from "src/context/blog-context";
-import { getFormatDate } from "src/util/getDateFormat";
 import { CommentsSection } from "./blog-detail/CommentsSection";
-import { BlogTypes } from "src/context/types/blog";
+import { BlogTypes } from "@/app/context/types/blog";
+import { getFormatDate } from "@/app/util/getDateFormat";
+import { useBlogContext } from "@/app/context/blog-context";
+
 
 export const BlogDetails = () => {
   const { state, dispatch }: any = useBlogContext();

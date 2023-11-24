@@ -1,11 +1,11 @@
 import React, { FC, useEffect, useState } from 'react'
-import { useBlogContext } from 'src/context/blog-context';
-import { BlogTypes } from 'src/context/types/blog';
-import { getFacebookImagePosts, getFacebookPageAccessToken } from 'src/services/facebook-services';
-import type { Keys } from 'src/util/types'
 import { BlogPosts } from './BlogPosts';
 import { BlogDetails } from './BlogDetails';
 import { SkeletonLoaderComponent } from './SkeletonLoaderComponent';
+import { Keys } from '@/app/util/types';
+import { getFacebookImagePosts, getFacebookPageAccessToken } from '@/app/services/facebook-services';
+import { useBlogContext } from '@/app/context/blog-context';
+import { BlogTypes } from '@/app/context/types/blog';
 
 interface BlogRouterProps {
   keys: Keys

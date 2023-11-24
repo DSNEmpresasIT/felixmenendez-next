@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useBlogContext } from "src/context/blog-context";
-import { BlogTypes } from "src/context/types/blog";
-import { getFormatDate } from "src/util/getDateFormat";
-import { PATH_ROUTES } from "src/util/pages";
-import type { FacebookPost } from "src/util/types";
 import ReactPaginate from "react-paginate"; 
+import { FacebookPost } from "@/app/util/types";
+import { PATH_ROUTES } from "@/app/util/pages";
+import { getFormatDate } from "@/app/util/getDateFormat";
+import { BlogTypes } from "@/app/context/types/blog";
+import { useBlogContext } from "@/app/context/blog-context";
 
 export const BlogPosts = () => {
   const { state, dispatch }: any = useBlogContext();
