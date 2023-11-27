@@ -1,8 +1,12 @@
+'use client'
 import React, { useState } from 'react';
 import '../assets/wsp-glove-button/styles.css'
 import phonesData from '../../util/data'
+import WppIcon from '../assets/wsp-glove-button/wpp-icon.png';
+
 
 const WhatsAppButtonComponent = () => {
+  
   const [isLinksDisplayActive, setIsLinksDisplayActive] = useState(false);
   return (
     <>
@@ -37,7 +41,7 @@ const WhatsAppButtonComponent = () => {
             // onClick={() => setIsLinksDisplayActive(!isLinksDisplayActive)}
           >
             <span className='tooltiptext'>Contactanos!</span>
-            <img src="../assets/wsp-glove-button/wpp-icon.png" width={35} alt="whatsapp" />
+            <img src={WppIcon.src} width={35} alt="whatsapp" />
           </a>
         )
       }

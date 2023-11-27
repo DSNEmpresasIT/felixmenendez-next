@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { BlogRouter } from './BlogRouter'
 import { BlogAsideSection } from './BlogAsideSection'

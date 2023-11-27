@@ -1,3 +1,4 @@
+'use client'
 import { useBlogContext } from "@/app/context/blog-context";
 import { BlogTypes } from "@/app/context/types/blog";
 import { getInstagramVideos } from "@/app/services/instagram-services";

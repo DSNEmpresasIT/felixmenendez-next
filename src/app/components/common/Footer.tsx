@@ -7,8 +7,6 @@ import { LastInstagramReel } from './footer/LastInstagramReel'
 const Footer =  () => {
   const  INSTAGRAM_TOKEN  = process.env.INSTAGRAM_TOKEN; 
   return (
-    <>
-        {/* Resto del código del pie de página */}
           <footer className="footer-section padding-tb pb-0">
             <div className="container">
               <div className="footer-top">
@@ -75,15 +73,13 @@ const Footer =  () => {
                         <img src="/assets/images/logo/dsn.png" style={{ maxWidth: '33px' }} alt="dsn" />
                       </span>
                     </a>
-                    <a href="https://donweb.com/es-ar/certificados-ssl" target="_blank" rel="noopener noreferrer">
+                    {/* <a href="https://donweb.com/es-ar/certificados-ssl" target="_blank" rel="noopener noreferrer">
                       <span>Certificados SSL Argentina</span>
-                    </a>
+                    </a> */}
                   </p>
                 </div>
             </div>
           </footer>
-        {/* Resto del código del pie de página */}
-    </>
   )
 }
 

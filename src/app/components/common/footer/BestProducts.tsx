@@ -1,6 +1,9 @@
+'use client'
+import { db } from '@/app/util/catalogData';
+import { ProductData } from '@/app/util/types';
 import React, { useEffect, useState } from 'react'
-import { db } from 'src/util/catalogData';
-import type { ProductData } from 'src/util/types'
+
+
 
 export const BestProducts = () => {
   const [ products, setProducts ] = useState<ProductData[]>();

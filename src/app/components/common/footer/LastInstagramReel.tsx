@@ -1,3 +1,4 @@
+'use client'
 import { getLastInstagramReel } from '@/app/services/instagram-services';
 import React, { useEffect, useState } from 'react'
 
