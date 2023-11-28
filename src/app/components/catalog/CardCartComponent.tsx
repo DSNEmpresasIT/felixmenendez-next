@@ -1,5 +1,6 @@
 import { getPlaceholder } from '@/app/util/getPlaceholder';
 import { PATH_ROUTES } from '@/app/util/pages';
+import Link from 'next/link';
 import React, { FC, useEffect, useState } from 'react';
 ;
 
@@ -13,14 +14,14 @@ interface CardCartComponentProps {
   isActiveSubstance?: boolean
 }
 
-const CardButton = ({ link }: {link: string}) => (
-  <a 
-    href={`/${PATH_ROUTES.PRODUCTS_PATH}/${link}`}
+const CardButton = ({ name }: {name: string}) => (
+  <Link
+    href={{pathname: PATH_ROUTES.PRODUCTS_PATH, query: {id: name}}}
     style={{ width: '120px', height: '30px', fontSize: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0', border: 'none' }}
     className='lab-btn'
   >
     <span>Consultar</span>
-  </a>
+  </Link>
 )
 
 export const CardCartComponent:FC<CardCartComponentProps> = ({ title,  description, img , filter, formulacion, isActiveSubstance }) => {
@@ -63,7 +64,7 @@ export const CardCartComponent:FC<CardCartComponentProps> = ({ title,  descripti
             )
           }
           <div className='col-12 mt-1' >
-            <CardButton link={title.split(' ').join('')} />
+            <CardButton name={title.split(' ').join('')} />
           </div>
         </div>
       </div>
@@ -85,7 +86,7 @@ export const CardCartComponent:FC<CardCartComponentProps> = ({ title,  descripti
           <h6><a href="#">{title}</a></h6>
           <p style={{ maxHeight: '100px', overflow: 'hidden', textOverflow: 'ellipsis' }}>{description}</p>
           <div className='d-flex mt-3 justify-content-between'>
-            <CardButton link={title.split(' ').join('')} />
+            <CardButton name={title.split(' ').join('')} />
             {
               formulacion && (
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>

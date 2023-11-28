@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { PAGES, PATH_ROUTES } from '@/app/util/pages';
 import { ProductTypes } from '@/app/util/types';
 import { usePathname } from 'next/navigation';
+import { db } from '@/app/util/catalogData';
 
 
 const Header = () => {
@@ -22,6 +23,8 @@ const Header = () => {
     return conditionals[actualRoute] ?? false;
   };
 
+  const categorias = ProductTypes;
+
   return (
     <header className={`header-section transparent-header ${isBlack(pathname as PAGES) ? 'black-header' : 'white-header'}`}>
       <div className="header-area">
@@ -29,7 +32,7 @@ const Header = () => {
           <nav className="navbar navbar-expand-lg">
             <div className="primary-menu">
               <div className="logo">
-                <Link href={PATH_ROUTES.HOME_PATH}><img src="/assets/images/logo/01.png" alt="logo" /></Link>
+                <Link  href={{pathname: PATH_ROUTES.BLOG_PATH}}><img src="/assets/images/logo/01.png" alt="logo" /></Link>
               </div>
               <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i className="icofont-navigation-menu"></i>
@@ -41,10 +44,10 @@ const Header = () => {
                       <li className={pathname === PATH_ROUTES.HOME_PATH ? 'active' : ''}><Link href={PATH_ROUTES.HOME_PATH}>Home</Link></li>
                       <li className={pathname === PATH_ROUTES.BLOG_PATH ? 'active' : ''}><Link href={`/${PATH_ROUTES.BLOG_PATH}`}>Noticias</Link></li>
                       <li className={pathname === PATH_ROUTES.CATALOG_PATH ? 'active' : ''}>
-                        <a href={`/${PATH_ROUTES.PRODUCTS_PATH}/${PATH_ROUTES.CATALOG_PATH}`}>Productos</a>
+                        <a href={`/${PATH_ROUTES.CATALOG_PATH}`}>Productos</a>
                           <ul className="agri-ul">
                             <li>
-                              <Link href={`/${PATH_ROUTES.PRODUCTS_PATH}/${PATH_ROUTES.CATALOG_PATH}/${ProductTypes.HERBICIDAS}`} passHref>
+                              <Link href={`/${PATH_ROUTES.PRODUCTS_PATH}/${PATH_ROUTES.CATALOG_PATH}/${ProductTypes.HERBICIDAS}`} >
                                 Herbicidas
                               </Link>
                             </li>

@@ -13,14 +13,14 @@ const Sponsors = () => {
     <div className="sponsor-section padding-tb">
       <div className="container">
         <div className="section-wrapper wow fadeInUp" data-wow-delay="0.4s">
-          <div className="sponsor-slider">
-            <div className="swiper-wrapper">
+          <div className="sponsor-slider" >
+            <div className="swiper-wrapper" style={{maxHeight: '160px'}}>
               {
-                data.map(pic => {
+                data.map((pic, i) => {
                   return (
-                  <div className="swiper-slide">
+                  <div className="swiper-slide" key={i}>
                     <div className="sponsor-item">
-                      <div className="sponsor-thumb">
+                      <div className="sponsor-thumb" >
                         <a><img src={`/assets/images/sponsor/${pic}`} alt="sponsor"/></a>
                       </div>
                     </div>

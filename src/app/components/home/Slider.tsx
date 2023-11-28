@@ -25,16 +25,16 @@ const Slider = () => {
   return (
 <section className="banner banner-2">
 	<div className="banner-slider">
-		<div className="swiper-wrapper">
+		<div className="swiper-wrapper" >
 			{
 				dataSlider.map((slide, i) => {
 						return (
 							<div className="swiper-slide" key={i}>
 								<div className="container">
 									<div className="banner-item">
-										<div className="banner-inner">
-											<div className="banner-thumb">
-												<img style={{ minHeight: '600px' }} src={`/assets/images/blog/0${i+1}.jpg`} alt="banner-slider"/>
+										<div  className="banner-inner">
+											<div  className="banner-thumb">
+												<img   src={`/assets/images/blog/0${i+1}.jpg`} alt="banner-slider"/>
 											</div>
 											<div className="banner-content">
 												<h3></h3>

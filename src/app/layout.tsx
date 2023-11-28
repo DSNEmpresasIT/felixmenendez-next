@@ -1,30 +1,19 @@
 // components/Layout.tsx
-import Head from 'next/head';
 import 'animate.css';
-import '../app/components/assets/paginationBlogPosts.css';
+import '@/app/components/assets/paginationBlogPosts.css';
 import React, { Children } from 'react';
-import Preloader from './components/common/Preloader';
-import Header from './components/common/Header';
-import Footer from './components/common/Footer';
-import WhatsAppButtonComponent from './components/common/WhatsAppButtonComponent';
-import BackToTop from './components/common/BackToTop';
-import Script from 'next/script';
-import { Router } from 'next/router';
-
-interface LayoutProps {
-  title: string;
-  description: string;
-  children: React.ReactNode;
-}
+import Header from '@/app/components/common/Header';
+import Footer from '@/app/components/common/Footer';
+import WhatsAppButtonComponent from '@/app/components/common/WhatsAppButtonComponent';
+import BackToTop from '@/app/components/common/BackToTop';
+import BodyLayout from './BodyLayout';
 
 
-
-const Layout: React.FC<LayoutProps> = ({ title, description, children }) => {
+export default function RootLayout({children}:{children:React.ReactNode}) {
   return (
-    <>
+    <html lang="es">
       <head>
-        <title>{title}</title>
-        <meta name="description" content={description} />
+        <title>Felixmenendez</title>
         <meta property="og:title" content="Félix Menendez - Soluciones Agropecuarias - Concordia E.R." />
         <meta property="og:image" content="https://felixmenendez.com.ar/assets/images/product/home3/06.jpg" />
         <meta property="og:image:width" content="300" />
@@ -39,27 +28,14 @@ const Layout: React.FC<LayoutProps> = ({ title, description, children }) => {
         <link rel="stylesheet" href="/assets/css/swiper.min.css"/>
         <link rel="stylesheet" href="/assets/css/style.css"/>
       </head>
-      <body>
-          <Preloader />
-          <Header />
-          {children}
-          <Footer />
-          <WhatsAppButtonComponent />
-          <BackToTop />
-      </body>
-      <script src="/assets/js/jquery.js" />
-      <script src="/assets/js/fontawesome.min.js" />
-      <script src="/assets/js/waypoints.min.js" />
-      <script src="/assets/js/bootstrap.min.js" />
-      <script src="/assets/js/wow.min.js" />
-      <script src="/assets/js/swiper.min.js" />
-      <script src="/assets/js/jquery.countdown.min.js" />
-      <script src="/assets/js/jquery.counterup.min.js"  />
-      <script src="/assets/js/isotope.pkgd.min.js" />
-      <script src="/assets/js/lightcase.js" />
-      <script src="/assets/js/functions.js" />
-    </>
+          <BodyLayout>
+            <Header />
+            {children}
+            <Footer />
+            <WhatsAppButtonComponent />
+            <BackToTop />
+          </BodyLayout>
+    </html>
   );
 };
 
-export default Layout;

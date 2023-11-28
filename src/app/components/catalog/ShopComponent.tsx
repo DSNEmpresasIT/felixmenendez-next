@@ -1,3 +1,4 @@
+'use client'
 import React, { FC, useEffect, useState } from 'react';
 import { CardCartComponent } from './CardCartComponent';
 import type { ProductData, ProductTypes } from '@/app/util/types';
@@ -5,6 +6,7 @@ import { db } from '@/app/util/catalogData';
 import { SearcherComponent } from './SearcherComponent';
 import { ShopNavComponentNew } from './ShopNavComponentNew';
 import ReactPaginate from "react-paginate";
+import Script from 'next/script';
 interface ShopComponentProps {
   filter: ProductTypes | undefined;
 }
@@ -60,6 +62,7 @@ export const ShopComponent:FC<ShopComponentProps> = ({ filter }) => {
   }, [currentPage, ProductData]);
 
   return (
+    <>
     <div className="shop-page padding-tb">
       <div className="container">
         <div className="section-wrapper">
@@ -124,5 +127,7 @@ export const ShopComponent:FC<ShopComponentProps> = ({ filter }) => {
         </div>
       </div>
     </div>
+
+    </>
   )
 }
