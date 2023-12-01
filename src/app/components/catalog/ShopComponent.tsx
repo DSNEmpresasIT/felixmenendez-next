@@ -1,43 +1,46 @@
 'use client'
 import React, { FC, useEffect, useState } from 'react';
 import { CardCartComponent } from './CardCartComponent';
-import type { ProductData, ProductTypes } from '@/app/util/types';
+import type { Product, ProductData, ProductTypes } from '@/app/util/types';
 import { db } from '@/app/util/catalogData';
 import { SearcherComponent } from './SearcherComponent';
 import { ShopNavComponentNew } from './ShopNavComponentNew';
 import ReactPaginate from "react-paginate";
 import Script from 'next/script';
+import { getAllProducts, getProductByName, getProductsByCategory } from '@/app/services/Supabase/product-services';
 interface ShopComponentProps {
   filter: ProductTypes | undefined;
 }
 
 export const ShopComponent:FC<ShopComponentProps> = ({ filter }) => {
-  const [ filters, setFilters ] = useState<ProductTypes | null>(null); 
-  const [ProductData, setProductData] = useState<ProductData[]>(db);
+  const [ filters, setFilters ] = useState<string | undefined>(undefined); 
+  const [ProductData, setProductData] = useState<Product[] | null>(null);
   const [currentPage, setCurrentPage] = useState(0);
-  const [dataPaginate, setDataPaginate ] = useState<ProductData[]>();
+  const [dataPaginate, setDataPaginate ] = useState<Product[]>();
   const postsPerPage = 6; // Número de publicaciones por página
 
-  const handleFilterNav = (productType: ProductTypes, isName: boolean) => {
+  const handleFilterNav = async (categorie: string )  => {
     setCurrentPage(0);
-    let newData: ProductData[];
-    if (isName) {
-      newData = db.filter(product => product.name === productType)
-    } else {
-      newData = db.filter(product => product.filters.includes(productType))
+    try {
+        const productsByName = await getProductsByCategory(categorie);
+      setProductData(productsByName);
+      console.log(productsByName , ' data nueva')
+      console.log(ProductData, 'product data')
+    } catch (error) {
+      console.error('Error fetching products:', error);
     }
-    setProductData(newData);
   }
 
-  const handleUpdateFilterData = (filteredData: ProductData[]) => {
-    setProductData(filteredData);
+  const handleUpdateFilterData = async() => {
+    const allData:Product[] | null = await getAllProducts();
+    setProductData(allData);
   };
 
   const handlePageChange = (selectedPage: number) => {
     setCurrentPage(selectedPage);
   };
 
-  const handleSetFilter = (filter: ProductTypes) => {
+  const handleSetFilter = (filter: string) => {
     setFilters(filter);
   }
 
@@ -49,9 +52,10 @@ export const ShopComponent:FC<ShopComponentProps> = ({ filter }) => {
 
   useEffect(() => {
     if (filters) {
-      handleFilterNav(filters, false)
+      console.log(filters)
+      handleFilterNav(filters)
     } else {
-      handleUpdateFilterData(db);
+      // handleUpdateFilterData();
     }
   }, [filters]);
 
@@ -69,14 +73,15 @@ export const ShopComponent:FC<ShopComponentProps> = ({ filter }) => {
           <div className="row justify-content-center">
             <div className="col-lg-3 col-md-7 col-12">
               <aside>
-                <SearcherComponent setProductData={setProductData} allData={db} />
-                <ShopNavComponentNew handleSetFilter={handleSetFilter} updateFilteredData={handleUpdateFilterData} filters={filters} productsLength={ProductData.length} />
+                {/* <SearcherComponent setProductData={setProductData} allData={db} /> */}
+                <ShopNavComponentNew handleSetFilter={handleSetFilter} updateFilteredData={handleUpdateFilterData} filters={filters} productsLength={ProductData ? ProductData.length : 0}
+/>
               </aside>
             </div>
             <div className="col-lg-9 col-12">
               <article>
                 <div className="shop-title d-flex flex-wrap justify-content-between">
-                  <p>{dataPaginate?.length} {ProductData.length > 1 ? `Resultados de ${ProductData.length}` : 'resultado'}</p>
+                  {/* <p>{dataPaginate?.length} {ProductData.length > 1 ? `Resultados de ${ProductData.length}` : 'resultado'}</p> */}
                   <div className="product-view-mode">
                     <a className="active" data-target="grids"><i className="icofont-ghost"></i></a>
                     <a data-target="lists"><i className="icofont-listing-box"></i></a>
@@ -84,16 +89,16 @@ export const ShopComponent:FC<ShopComponentProps> = ({ filter }) => {
                 </div>
                 <div className="shop-product-wrap grids row justify-content-center">
                   {
-                    dataPaginate?.map((data, i) => {
+                    dataPaginate?.map((data) => {
                       return (
                         <CardCartComponent
-                          key={i}
-                          title={data.name}
-                          description={data.specs?.description ?? ''}
+                          id={data.id}
+                          name={data.name}
                           img={data.img}
-                          filter={data.filters}
                           formulacion={data.formulacion}
-                          isActiveSubstance={data.isActiveSubstance}
+                          is_active_substance={data.is_active_substance} 
+                          created_at={data.created_at}                                                  
+                          filters={filters}                        
                         />
                       )
                     })

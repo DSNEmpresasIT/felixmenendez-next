@@ -34,7 +34,7 @@
   position: fixed;
   bottom: 40px;
   left: 40px;
-  background-color: #f7f7f7cf7;
+  background-color:  rgba(247, 247, 247, 0.8);
   border-radius: 5px 5px 5px 5px;
   border: 1px solid rgba(0, 0, 0, 0.283);
   flex-direction: column;

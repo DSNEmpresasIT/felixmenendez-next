@@ -100,6 +100,7 @@ export interface Product {
   img?: string | null;
   created_at: Date;
   is_active_substance?: boolean | null;
+  filters?: string;
 }
 
 export interface Category {

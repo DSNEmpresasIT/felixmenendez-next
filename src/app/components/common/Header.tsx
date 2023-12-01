@@ -1,16 +1,32 @@
 // Header.tsx
 'use client'
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { PAGES, PATH_ROUTES } from '@/app/util/pages';
-import { ProductTypes } from '@/app/util/types';
+import { Category, ProductTypes } from '@/app/util/types';
 import { usePathname } from 'next/navigation';
 import { db } from '@/app/util/catalogData';
-
+import { getCategoriesFathers } from '@/app/services/Supabase/category-services';
 
 const Header = () => {
   const pathname = usePathname();
   
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  const fetchCategories = async () => {
+    const categoriesData = await getCategoriesFathers();
+    if (categoriesData) {
+      setCategories(categoriesData);
+    }
+  };
+
+  useEffect(() => {
+    if(categorias){
+      fetchCategories();
+    }
+  }, []);
+
+
   const isBlack = (actualRoute: PAGES) => {
     const conditionals = {
       [PAGES.HOME_PAGE]: false,
@@ -23,16 +39,18 @@ const Header = () => {
     return conditionals[actualRoute] ?? false;
   };
 
+ 
+
   const categorias = ProductTypes;
 
   return (
-    <header className={`header-section transparent-header ${isBlack(pathname as PAGES) ? 'black-header' : 'white-header'}`}>
+    <header className={`header-section transparent-header ${isBlack(pathname as PAGES) ? 'white-header' :  'black-header'}`}>
       <div className="header-area">
         <div className="container">
           <nav className="navbar navbar-expand-lg">
             <div className="primary-menu">
               <div className="logo">
-                <Link  href={{pathname: PATH_ROUTES.BLOG_PATH}}><img src="/assets/images/logo/01.png" alt="logo" /></Link>
+                <Link  href={{pathname: PATH_ROUTES.HOME_PATH}}><img src="/assets/images/logo/01.png" alt="logo" /></Link>
               </div>
               <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i className="icofont-navigation-menu"></i>
@@ -41,41 +59,19 @@ const Header = () => {
                 <div className="main-area">
                   <div className="main-menu">
                     <ul className="agri-ul">
-                      <li className={pathname === PATH_ROUTES.HOME_PATH ? 'active' : ''}><Link href={PATH_ROUTES.HOME_PATH}>Home</Link></li>
-                      <li className={pathname === PATH_ROUTES.BLOG_PATH ? 'active' : ''}><Link href={`/${PATH_ROUTES.BLOG_PATH}`}>Noticias</Link></li>
+                      <li className={pathname === PATH_ROUTES.HOME_PATH ? 'active' : ''}><a href={PATH_ROUTES.HOME_PATH}>Home</a></li>
+                      <li className={pathname === PATH_ROUTES.BLOG_PATH ? 'active' : ''}><a href={`/${PATH_ROUTES.BLOG_PATH}`}>Noticias</a></li>
                       <li className={pathname === PATH_ROUTES.CATALOG_PATH ? 'active' : ''}>
                         <a href={`/${PATH_ROUTES.CATALOG_PATH}`}>Productos</a>
                           <ul className="agri-ul">
-                            <li>
-                              <Link href={`/${PATH_ROUTES.PRODUCTS_PATH}/${PATH_ROUTES.CATALOG_PATH}/${ProductTypes.HERBICIDAS}`} >
-                                Herbicidas
-                              </Link>
-                            </li>
-                            <li>
-                              <Link href={`/${PATH_ROUTES.PRODUCTS_PATH}/${PATH_ROUTES.CATALOG_PATH}/${ProductTypes.FERTILIZANTES}`}>
-                                Fertilizantes
-                              </Link>
-                            </li>
-                            <li>
-                              <Link href={`/${PATH_ROUTES.PRODUCTS_PATH}/${PATH_ROUTES.CATALOG_PATH}/${ProductTypes.INSECTICIDAS_GENERAL}`}>
-                                Insecticidas
-                              </Link>
-                            </li>
-                            <li>
-                              <Link href={`/${PATH_ROUTES.PRODUCTS_PATH}/${PATH_ROUTES.CATALOG_PATH}/${ProductTypes.FUNGICIDAS}`}>
-                                Fungicidas
-                              </Link>
-                            </li>
-                            <li>
-                              <Link href={`/${PATH_ROUTES.PRODUCTS_PATH}/${PATH_ROUTES.CATALOG_PATH}/${ProductTypes.SEMILLA}`}>
-                                Semillas
-                              </Link>
-                            </li>
-                            <li>
-                              <Link href={`/${PATH_ROUTES.PRODUCTS_PATH}/${PATH_ROUTES.CATALOG_PATH}/${ProductTypes.HERMICIDAS}`}>
-                                Hermicidas
-                              </Link>
-                            </li>
+                          {categories.map((category) => (
+                              <li key={category.id}>
+                                {/* <Link href={`/${PATH_ROUTES.CATALOG_PATH}/?categoria=${category.category}`}> */}
+                                <Link href={`/${PATH_ROUTES.CATALOG_PATH}/?type=${category.category}`}>
+                                  {category.category}
+                                </Link>
+                              </li>
+                          ))}
                           </ul>
                       </li>
                       <li className={pathname === PATH_ROUTES.CONTACT_PATH ? 'active' : ''}><Link href={`/${PATH_ROUTES.CONTACT_PATH}`}>Contacto</Link></li>
