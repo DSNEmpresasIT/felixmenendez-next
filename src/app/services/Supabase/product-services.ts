@@ -1,8 +1,8 @@
 import { Category, Product } from "@/app/util/types";
 import { createClient } from "@supabase/supabase-js";
 
-const MAIN_SUPABASE_URL = 'https://skmptjjgpoopkorjdmus.supabase.co';
-const MAIN_SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNrbXB0ampncG9vcGtvcmpkbXVzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5ODY5MzAwNiwiZXhwIjoyMDE0MjY5MDA2fQ.laojp_TeTO0ZKOWSO2HSF6X7ZfxUFxBt_3Jrs781rJU';
+const MAIN_SUPABASE_URL = '';
+const MAIN_SUPABASE_KEY = '';
 
 
 const supabase = createClient(MAIN_SUPABASE_URL, MAIN_SUPABASE_KEY);
