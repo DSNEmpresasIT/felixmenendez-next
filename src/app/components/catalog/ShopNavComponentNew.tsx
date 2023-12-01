@@ -140,7 +140,7 @@ export const ShopNavComponentNew = ({
       updateFilteredData();
       resetFilters();
     } else if (index === 1 && filters) {
-      // updateFilteredData(db.filter(item => item.filters.includes(filters)))
+      updateFilteredData()
     }
   };
 

@@ -30,6 +30,50 @@ export const getProductByName= async(productName:string):Promise<Product[] | nul
   }  
 }
 
+export const getProductsByNameInCategory = async (category: string, query: string): Promise<Product[] | null> => {
+  try {
+    // Paso 1: Obtener el ID de la categoría
+    const categoryResponse = await supabase
+      .from('categories')
+      .select('id')
+      .ilike('category', `%${category}%`);
+
+    if (categoryResponse.data) {
+      const categoryId = categoryResponse.data[0]?.id;
+
+      if (categoryId) {
+        // Paso 2: Obtener los IDs de los productos en la categoría
+        const { data, error } = await supabase
+          .from('products_categories')
+          .select('product_id')
+          .eq('category_id', categoryId);
+
+        if (data) {
+          // Mapear los IDs de productos
+          const productIds = data.map(item => item.product_id);
+
+          // Paso 3: Obtener los detalles de los productos con la condición de nombre
+          const productDetails = await supabase
+            .from('products')
+            .select('*')
+            .in('id', productIds)
+            .ilike('name', `%${query}%`);
+
+          if (productDetails.data) {
+            // Devolver los detalles de los productos
+            return productDetails.data as Product[];
+          }
+        }
+      }
+    }
+  } catch (error) {
+    console.error('Error al obtener los productos:', error);
+  }
+
+  return null;
+};
+
+
 export const getProductsByCategory = async (category: string): Promise<Product[] | null> => {
   try {
     // Paso 1: Obtener el ID de la categoría 'Fertilizantes'

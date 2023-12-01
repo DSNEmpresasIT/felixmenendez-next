@@ -55,7 +55,7 @@ export const ShopComponent:FC<ShopComponentProps> = ({ filter }) => {
       console.log(filters)
       handleFilterNav(filters)
     } else {
-      // handleUpdateFilterData();
+       handleUpdateFilterData();
     }
   }, [filters]);
 
@@ -73,7 +73,7 @@ export const ShopComponent:FC<ShopComponentProps> = ({ filter }) => {
           <div className="row justify-content-center">
             <div className="col-lg-3 col-md-7 col-12">
               <aside>
-                {/* <SearcherComponent setProductData={setProductData} allData={db} /> */}
+                <SearcherComponent setProductData={setProductData} updateFilteredData={handleUpdateFilterData}  /> 
                 <ShopNavComponentNew handleSetFilter={handleSetFilter} updateFilteredData={handleUpdateFilterData} filters={filters} productsLength={ProductData ? ProductData.length : 0}
 />
               </aside>

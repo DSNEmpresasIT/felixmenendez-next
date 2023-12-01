@@ -1,23 +1,34 @@
-import { ProductData } from '@/app/util/types';
+import { getProductByName, getProductsByNameInCategory } from '@/app/services/Supabase/product-services';
+import { Product, ProductData } from '@/app/util/types';
+import { useSearchParams } from 'next/navigation';
 import React, { Dispatch, FC, SetStateAction, useState } from 'react';
 
 
 interface SearcherComponentProps {
-  setProductData: Dispatch<SetStateAction<ProductData[]>>,
-  allData: ProductData[]
+  setProductData: Dispatch<SetStateAction<Product[] | null>>,
+  updateFilteredData: () => void;
 }
 
-export const SearcherComponent:FC<SearcherComponentProps> = ({ setProductData, allData }) => {
+export const SearcherComponent:FC<SearcherComponentProps> = ({ setProductData , updateFilteredData}) => {
+  const type = useSearchParams().get("categoria")
+
   const [ input, setInput ] = useState<string>('');
 
-  const hanldeInputChange = (e: any) => {
+  const getData = async (query: any) => {
+    const search = query;
+    if(type){
+      const filter = await getProductsByNameInCategory(type, query)
+      search.length ? setProductData(filter) : updateFilteredData() ;
+    } else {
+      const filter = await getProductByName(input) 
+      search.length ? setProductData(filter) : updateFilteredData() ;
+    }
+
+  }
+
+  const hanldeInputChange= (e: any)=>{
     const search = e.target.value;
-    const filter = allData.filter( product => (
-      product.name.toLowerCase().indexOf(search.toLowerCase()) !== -1) 
-      || (product.formulacion && product.formulacion.toLowerCase().indexOf(search.toLowerCase()) !== -1)
-    )
-    
-    search.length ? setProductData(filter) : setProductData(allData);
+    getData(search)
     setInput(search)
   }
 
