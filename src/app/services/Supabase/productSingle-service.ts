@@ -2,9 +2,12 @@ import { ProductSingle } from "@/app/util/types";
 import { createClient } from "@supabase/supabase-js";
 
 
-const MAIN_SUPABASE_URL = ''
-const MAIN_SUPABASE_KEY ='';
+const MAIN_SUPABASE_URL = process.env.NEXT_PUBLIC_MAIN_SUPABASE_URL;
+const MAIN_SUPABASE_KEY = process.env.NEXT_PUBLIC_MAIN_SUPABASE_KEY;
 
+if (!MAIN_SUPABASE_URL || !MAIN_SUPABASE_KEY) {
+  throw new Error("Error: Supabase key or URL not provided");
+}
 
 const supabase = createClient(MAIN_SUPABASE_URL, MAIN_SUPABASE_KEY)
 

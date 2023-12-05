@@ -9,50 +9,6 @@ import {
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
-// const mainNavData = [
-//   {
-//     name: "Herbicidas",
-//     filter: ProductTypes.HERBICIDAS,
-//     length: db.filter((product) =>
-//       product.filters.includes(ProductTypes.HERBICIDAS)
-//     ).length,
-//   },
-//   {
-//     name: "Fertilizantes",
-//     filter: ProductTypes.FERTILIZANTES,
-//     length: db.filter((product) =>
-//       product.filters.includes(ProductTypes.FERTILIZANTES)
-//     ).length,
-//   },
-//   {
-//     name: "Insecticidas",
-//     filter: ProductTypes.INSECTICIDAS_GENERAL,
-//     length: db.filter((product) =>
-//       product.filters.includes(ProductTypes.INSECTICIDAS_GENERAL)
-//     ).length,
-//   },
-//   {
-//     name: "Fungicidas",
-//     filter: ProductTypes.FUNGICIDAS,
-//     length: db.filter((product) =>
-//       product.filters.includes(ProductTypes.FUNGICIDAS)
-//     ).length,
-//   },
-//   {
-//     name: "Hermicidas",
-//     filter: ProductTypes.HERMICIDAS,
-//     length: db.filter((product) =>
-//       product.filters.includes(ProductTypes.HERMICIDAS)
-//     ).length,
-//   },
-//   {
-//     name: "Semilla",
-//     filter: ProductTypes.SEMILLA,
-//     length: db.filter((product) =>
-//       product.filters.includes(ProductTypes.SEMILLA)
-//     ).length,
-//   },
-// ];
 
 export const ShopNavComponentNew = ({
   handleSetFilter,
@@ -81,17 +37,16 @@ export const ShopNavComponentNew = ({
 
 
   const handleClickCategory = (category: string | null, isName: boolean) => {
-    // if(type){
-    //   getCategoriesChildren(category as string)
-    // }
     if (category) {
       if (!showSubtypes || category !== selectedSubtype) {
         handleSetFilter(category);
         setSelectedTags((prevTags) => {
-          if (!prevTags.includes(category)) {
-            return [...prevTags, category];
+          // Si ya hay dos tags, reemplaza el segundo tag con el nuevo tag
+          if (prevTags.length === 2) {
+            return [prevTags[0], category];
           }
-          return prevTags;
+          // Si no, agrega el nuevo tag al array
+          return [...prevTags, category];
         });
       }
       filterCategoryByFormulacion(category);
@@ -240,7 +195,7 @@ export const ShopNavComponentNew = ({
             <>
               <li>
                 <a
-                  href={`/${PATH_ROUTES.PRODUCTS_PATH}/${PATH_ROUTES.CATALOG_PATH}`}
+                  href={`/${PATH_ROUTES.PRODUCTS_PATH}}`}
                   className="d-flex flex-wrap justify-content-between"
                 >
                   <span>
@@ -267,7 +222,7 @@ export const ShopNavComponentNew = ({
                           <i className="icofont-double-right"></i>
                           {data?.category}
                         </span>
-                        <span>({length})</span>
+                        {/* <span>({length})</span> */}
                       </Link>
                     </li>
                   ))

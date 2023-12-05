@@ -7,9 +7,9 @@ import React, { FC, useEffect, useState } from 'react';
 
 
 
-const CardButton = ({ name }: {name?: string}) => (
+const CardButton = ({ id }: {id?: string}) => (
   <Link
-    href={{pathname: PATH_ROUTES.PRODUCTS_PATH, query: {id: name}}}
+    href={{pathname: PATH_ROUTES.PRODUCTS_PATH, query: {id: id}}}
     style={{ width: '120px', height: '30px', fontSize: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0', border: 'none' }}
     className='lab-btn'
   >
@@ -57,7 +57,7 @@ export const CardCartComponent:FC<Product> = ({ name , img ,  formulacion, is_ac
             )
           }
           <div className='col-12 mt-1' >
-            <CardButton name={name?.split(' ').join('')} />
+            <CardButton id={id.toString()} />
           </div>
         </div>
       </div>
@@ -79,7 +79,7 @@ export const CardCartComponent:FC<Product> = ({ name , img ,  formulacion, is_ac
           <h6><a href="#">{name}</a></h6>
           {/* <p style={{ maxHeight: '100px', overflow: 'hidden', textOverflow: 'ellipsis' }}>{description}</p> */}
           <div className='d-flex mt-3 justify-content-between'>
-            <CardButton name={name?.split(' ').join('')} />
+            <CardButton id={id.toString()} />
             {
               formulacion && (
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
