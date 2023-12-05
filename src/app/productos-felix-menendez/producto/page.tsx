@@ -1,4 +1,5 @@
 'use client'
+import { getProductSingleById } from '@/app/services/Supabase/productSingle-service';
 import { db } from '@/app/util/catalogData';
 import { PATH_ROUTES } from '@/app/util/pages';
 import { ProductData } from '@/app/util/types';
@@ -12,6 +13,12 @@ interface pageProps {
 const page: FC<pageProps> =({params}) => {
   const path= useSearchParams().get("id")
   const productSelected:ProductData = db.filter((obj) => obj.name.split(' ').join('') === path)[0];
+
+  const getProductSingle= async () => {
+    const productSingle = await getProductSingleById(path as string) 
+
+  }
+
 
   return (
     <>

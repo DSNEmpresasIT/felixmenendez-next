@@ -44,7 +44,7 @@ const Header = () => {
   const categorias = ProductTypes;
 
   return (
-    <header className={`header-section transparent-header ${isBlack(pathname as PAGES) ? 'white-header' :  'black-header'}`}>
+    <header className={`header-section transparent-header ${isBlack(pathname as PAGES) ? 'black-header' :  'white-header' }`}>
       <div className="header-area">
         <div className="container">
           <nav className="navbar navbar-expand-lg">

@@ -108,3 +108,17 @@ export interface Category {
   category?: string | null;
   created_at: Date;
 }
+
+
+export interface ProductSingle {
+  product_id: bigint;
+  description: string;
+  activeSkill: string;
+  action: string;
+  usageRecommendations: string;
+  applicationMethod: string;
+  dosage: string;
+  malezas: string;
+  cultivos: string;
+  pdffiles: string;
+}

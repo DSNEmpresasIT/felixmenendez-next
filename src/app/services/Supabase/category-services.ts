@@ -1,9 +1,13 @@
 import { Category } from "@/app/util/types";
 import { createClient } from "@supabase/supabase-js";
+import { error } from "console";
 
 const MAIN_SUPABASE_URL = '';
 const MAIN_SUPABASE_KEY = '';
 
+if(!MAIN_SUPABASE_URL){
+  throw "Error supabase key"
+}
 
 const supabase = createClient(MAIN_SUPABASE_URL, MAIN_SUPABASE_KEY);
 

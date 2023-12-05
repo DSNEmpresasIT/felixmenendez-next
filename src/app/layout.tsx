@@ -35,6 +35,7 @@ export default function RootLayout({children}:{children:React.ReactNode}) {
             <WhatsAppButtonComponent />
             <BackToTop />
           </BodyLayout>
+          
     </html>
   );
 };
