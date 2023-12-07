@@ -81,7 +81,7 @@ const Header = () => {
                           <li><a target="_blank" href="https://www.facebook.com/solucionesagropecuariasintegrales"><i style={{ marginRight: '10px' }} className="fa-brands fa-facebook"></i>Facebook</a></li>
                           <li><a target="_blank" href="https://www.instagram.com/felixmenendezsrl/"><i style={{ marginRight: '10px' }} className="fa-brands fa-instagram"></i> Instagram</a></li>
                           <li><a target="_blank" href="https://www.youtube.com/@lafarmaciadelcampo"><i style={{ marginRight: '10px' }} className="fa-brands fa-youtube"></i> Youtube</a></li>
-                          <li><a target="_blank" href="https://linktr.ee/felixmemendezsrl"><i style={{ marginRight: '10px' }} className="fa-solid fa-link"></i> Linktree</a></li>
+                          <li><a target="_blank" href="https://linktr.ee/felixmemendez"><i style={{ marginRight: '10px' }} className="fa-solid fa-link"></i> Linktree</a></li>
                         </ul>
                       </li>
                     </ul>
