@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState } from "react";
 import { db } from "@/app/util/catalogData";
 import { PATH_ROUTES } from "@/app/util/pages";
@@ -6,8 +7,10 @@ import {
   getCategoriesChildren,
   getCategoriesFathers,
 } from "@/app/services/Supabase/category-services";
-import { useSearchParams } from "next/navigation";
+import {  useSearchParams } from "next/navigation";
 import Link from "next/link";
+
+
 
 
 export const ShopNavComponentNew = ({
@@ -21,7 +24,7 @@ export const ShopNavComponentNew = ({
   filters: string | undefined;
   productsLength: number;
 }) => {
-  let type: string | null = useSearchParams().get("type");
+  const type: string | null = useSearchParams().get("type");
   const [categories, setCategories] = useState<Category[] | null>([]);
   const [categoriesFhater, setCategoriesFhater] = useState<Category[] | null>([]);
 
@@ -34,6 +37,15 @@ export const ShopNavComponentNew = ({
   const showSubtypes =
     filters === ProductTypes.FERTILIZANTES ||
     (selectedSubtype !== null && selectedSubtype === filters);
+
+    const removeQueryParam = (param: string) => {
+      if (typeof window !== 'undefined') {
+        const url = new URL(window.location.href);
+        url.searchParams.delete(param);
+        window.history.replaceState({}, '', url.toString());
+      }
+    };
+    
 
 
   const handleClickCategory = (category: string | null, isName: boolean) => {
@@ -54,7 +66,6 @@ export const ShopNavComponentNew = ({
   };
 
   const getChilCategory = async (filter: string) => {
-    // setSelectedTags(filter as any)
     setCategoriesFhater(null);
     const categories = await getCategoriesChildren(filter);
     setCategories(categories);
@@ -77,27 +88,33 @@ export const ShopNavComponentNew = ({
 
   const resetFilters = () => {
     // @ts-ignore
-    handleSetFilter(null);
+    handleSetFilter("");
     setSelectedSubtype(null);
     setSelectedTags([]);
+
   };
 
   const handleRemoveTag = (index: number) => {
-    const updatedTags = selectedTags.filter((_, i) => i !== index);
     setSelectedFormulation(null);
-    setSelectedTags(updatedTags);
-
-    if (index === 0) {
-      type = null;
-      // handleClearTypeQuery()
-      getFathersCategories();
-      setCategories(null);
-      updateFilteredData();
+    const isMainCategory = index === 0;
+    const isSubCategory = index === 1;
+  
+    if (isMainCategory) {
       resetFilters();
-    } else if (index === 1 && filters) {
-      updateFilteredData()
+      removeQueryParam("categoria");
+    } else if (isSubCategory) {
+      resetFilters();
+      removeQueryParam("type");
+    } else {
+      const updatedTags = selectedTags.filter((_, i) => i !== index);
+      setSelectedTags(updatedTags);
+      updateFilteredData();
     }
+  
+    getFathersCategories();
+    setCategories(null);
   };
+  
 
   const filterCategoryByFormulacion = (category: string) => {
     const newFilteredProducts = db.filter((product) =>
@@ -113,6 +130,11 @@ export const ShopNavComponentNew = ({
 
   const setTags=(tag: string)=>{
     setSelectedTags((prevTags) => {
+
+      if (prevTags.length === 0) {
+        return [tag];
+      }
+
       if (!prevTags.includes(tag)) {
         return [...prevTags, tag];
       }
@@ -121,23 +143,25 @@ export const ShopNavComponentNew = ({
   }
 
   useEffect(() => {
+    
     if (filters) {
       filterCategoryByFormulacion(filters);
+      console.log(filters, "filtros en effect")
       setTags(filters)
     } else if (type) {
       console.log(type, " type en effect");
       getChilCategory(type);
       if (!selectedTags.includes(type)) {
-        setTags(type);
+        setSelectedTags([type])
       }
+
+    
     } else {
       getFathersCategories();
     }
   }, [filters, type]);
 
-  useEffect(() => {
-    console.log(selectedTags, "tags");
-  }, [selectedTags]);
+  
 
   return (
     <>
@@ -213,7 +237,14 @@ export const ShopNavComponentNew = ({
                           filters === data?.category ? "active" : ""
                         }`}
                         type="button"
-                        href={`/${PATH_ROUTES.CATALOG_PATH}/?categoria=${data.category}`}
+                        href={{
+                          pathname: `/${PATH_ROUTES.CATALOG_PATH}`,
+                          query: {
+                            type:selectedTags[0],
+                            categoria: data?.category || '', 
+                            
+                          },
+                        }}
                         onClick={() =>
                           handleClickCategory(data.category ?? null, false)
                         }
@@ -235,7 +266,12 @@ export const ShopNavComponentNew = ({
                           filters === data?.category ? "active" : ""
                         }`}
                         type="button"
-                        href={`/${PATH_ROUTES.CATALOG_PATH}/?type=${data.category}`}
+                        href={{
+                          pathname: `/${PATH_ROUTES.CATALOG_PATH}`,
+                          query: {
+                            type: data?.category || '',
+                          },
+                        }}
                         onClick={() => getChilCategory(data.category as string)}
                       >
                         <span>

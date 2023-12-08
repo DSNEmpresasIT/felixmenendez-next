@@ -27,7 +27,7 @@ const page = () => {
         </div>
       </section>
       {/* <!-- Page Header Section Ending Here --> */}
-      <ShopComponent filter={filter} />
+      <ShopComponent  filter={filter} />
       <Script src="/assets/js/jquery.js"/>
       <Script src="/assets/js/fontawesome.min.js"/>
       <Script src="/assets/js/waypoints.min.js"/>
