@@ -67,6 +67,7 @@ export const ShopNavComponentNew = ({
 
   const getChilCategory = async (filter: string) => {
     setCategoriesFhater(null);
+    setSelectedTags([filter])
     const categories = await getCategoriesChildren(filter);
     setCategories(categories);
     console.log(filters);
@@ -98,8 +99,7 @@ export const ShopNavComponentNew = ({
     setSelectedFormulation(null);
     const isMainCategory = index === 0;
     const isSubCategory = index === 1;
-  
-    if (isMainCategory) {
+   if (!isMainCategory) {
       resetFilters();
       removeQueryParam("categoria");
     } else if (isSubCategory) {
@@ -130,11 +130,9 @@ export const ShopNavComponentNew = ({
 
   const setTags=(tag: string)=>{
     setSelectedTags((prevTags) => {
-
       if (prevTags.length === 0) {
         return [tag];
       }
-
       if (!prevTags.includes(tag)) {
         return [...prevTags, tag];
       }
@@ -143,7 +141,6 @@ export const ShopNavComponentNew = ({
   }
 
   useEffect(() => {
-    
     if (filters) {
       filterCategoryByFormulacion(filters);
       console.log(filters, "filtros en effect")
