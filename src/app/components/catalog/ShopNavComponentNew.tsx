@@ -99,8 +99,9 @@ export const ShopNavComponentNew = ({
     setSelectedFormulation(null);
     const isMainCategory = index === 0;
     const isSubCategory = index === 1;
-   if (!isMainCategory) {
+   if (!isMainCategory || isMainCategory) {
       resetFilters();
+      removeQueryParam("type");
       removeQueryParam("categoria");
     } else if (isSubCategory) {
       resetFilters();
