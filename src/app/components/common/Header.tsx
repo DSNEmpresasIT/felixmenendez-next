@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { PAGES, PATH_ROUTES } from '@/app/util/pages';
 import { Category, ProductTypes } from '@/app/util/types';
 import { usePathname } from 'next/navigation';
-import { db } from '@/app/util/catalogData';
 import { getCategoriesFathers } from '@/app/services/Supabase/category-services';
 
 const Header = () => {
@@ -34,7 +33,7 @@ const Header = () => {
         [PATH_ROUTES.NOT_FOUD_PATH]: true,
       };
 
-      return conditionals[actualRoute] ?? false;
+      return conditionals[actualRoute] ?? true;
     };
 
     setIsBlackHeader(isBlack(pathname.replace(/^\/+/, '') as any));
@@ -57,10 +56,10 @@ const Header = () => {
                 <div className="main-area">
                   <div className="main-menu">
                     <ul className="agri-ul">
-                      <li className={pathname === PATH_ROUTES.HOME_PATH ? 'active' : ''}><a href={PATH_ROUTES.HOME_PATH}>Home</a></li>
+                      <li className={pathname === PATH_ROUTES.HOME_PATH ? 'active' : ''}><a href={'/'}>Home</a></li>
                       <li className={pathname === PATH_ROUTES.BLOG_PATH ? 'active' : ''}><a href={`/${PATH_ROUTES.BLOG_PATH}`}>Noticias</a></li>
                       <li className={pathname === PATH_ROUTES.CATALOG_PATH ? 'active' : ''}>
-                        <a href={`/${PATH_ROUTES.CATALOG_PATH}`}>Productos</a>
+                        <Link href={`/${PATH_ROUTES.CATALOG_PATH}`}>Productos</Link>
                           <ul className="agri-ul">
                           {categories.map((category) => (
                               <li key={category.id}>
@@ -79,7 +78,7 @@ const Header = () => {
                           <li><a target="_blank" href="https://www.facebook.com/solucionesagropecuariasintegrales"><i style={{ marginRight: '10px' }} className="fa-brands fa-facebook"></i>Facebook</a></li>
                           <li><a target="_blank" href="https://www.instagram.com/felixmenendezsrl/"><i style={{ marginRight: '10px' }} className="fa-brands fa-instagram"></i> Instagram</a></li>
                           <li><a target="_blank" href="https://www.youtube.com/@lafarmaciadelcampo"><i style={{ marginRight: '10px' }} className="fa-brands fa-youtube"></i> Youtube</a></li>
-                          <li><a target="_blank" href="https://linktr.ee/felixmemendez"><i style={{ marginRight: '10px' }} className="fa-solid fa-link"></i> Linktree</a></li>
+                          <li><a target="_blank" href="https://linktr.ee/felixmenendez"><i style={{ marginRight: '10px' }} className="fa-solid fa-link"></i> Linktree</a></li>
                         </ul>
                       </li>
                     </ul>

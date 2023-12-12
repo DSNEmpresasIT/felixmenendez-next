@@ -1,6 +1,5 @@
 "use client"
 import React, { useEffect, useState } from "react";
-import { db } from "@/app/util/catalogData";
 import { PATH_ROUTES } from "@/app/util/pages";
 import { Category, Product, ProductData, ProductTypes } from "@/app/util/types";
 import {
@@ -31,6 +30,7 @@ export const ShopNavComponentNew = ({
   const [filteredProducts, setFilteredProducts] = useState<ProductData[]>([]);
   const [selectedFormulation, setSelectedFormulation] = useState<string | null>(null);
   const [isActiveSubstance, setActiveSubstance] = useState<boolean | null>(false);
+
   const [selectedSubtype, setSelectedSubtype] = useState<ProductTypes | null>(null);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
@@ -53,15 +53,15 @@ export const ShopNavComponentNew = ({
       if (!showSubtypes || category !== selectedSubtype) {
         handleSetFilter(category);
         setSelectedTags((prevTags) => {
-          // Si ya hay dos tags, reemplaza el segundo tag con el nuevo tag
+          
           if (prevTags.length === 2) {
             return [prevTags[0], category];
           }
-          // Si no, agrega el nuevo tag al array
+          
           return [...prevTags, category];
         });
       }
-      filterCategoryByFormulacion(category);
+      // filterCategoryByFormulacion(category);
     }
   };
 
@@ -99,7 +99,7 @@ export const ShopNavComponentNew = ({
     setSelectedFormulation(null);
     const isMainCategory = index === 0;
     const isSubCategory = index === 1;
-   if (!isMainCategory || isMainCategory) {
+   if ( isMainCategory) {
       resetFilters();
       removeQueryParam("type");
       removeQueryParam("categoria");
@@ -117,17 +117,17 @@ export const ShopNavComponentNew = ({
   };
   
 
-  const filterCategoryByFormulacion = (category: string) => {
-    const newFilteredProducts = db.filter((product) =>
-      product.filters.includes(category)
-    );
-    setFilteredProducts(newFilteredProducts);
-    setActiveSubstance(
-      newFilteredProducts.length > 0
-        ? newFilteredProducts[0].isActiveSubstance || false
-        : false
-    );
-  };
+  // const filterCategoryByFormulacion = (category: string) => {
+  //   const newFilteredProducts = db.filter((product) =>
+  //     product.filters.includes(category)
+  //   );
+  //   setFilteredProducts(newFilteredProducts);
+  //   setActiveSubstance(
+  //     newFilteredProducts.length > 0
+  //       ? newFilteredProducts[0].isActiveSubstance || false
+  //       : false
+  //   );
+  // };
 
   const setTags=(tag: string)=>{
     setSelectedTags((prevTags) => {
@@ -143,17 +143,13 @@ export const ShopNavComponentNew = ({
 
   useEffect(() => {
     if (filters) {
-      filterCategoryByFormulacion(filters);
-      console.log(filters, "filtros en effect")
+      // filterCategoryByFormulacion(filters);
       setTags(filters)
     } else if (type) {
-      console.log(type, " type en effect");
       getChilCategory(type);
       if (!selectedTags.includes(type)) {
         setSelectedTags([type])
       }
-
-    
     } else {
       getFathersCategories();
     }
@@ -198,7 +194,7 @@ export const ShopNavComponentNew = ({
               ))}
             </ul>
             <a
-              onClick={resetFilters}
+              onClick={ () => handleRemoveTag(0)}
               style={{
                 marginTop: "5px",
                 color: "rgb(0, 103, 160)",
@@ -217,19 +213,19 @@ export const ShopNavComponentNew = ({
             <>
               <li>
                 <a
-                  href={`/${PATH_ROUTES.PRODUCTS_PATH}}`}
+                  href={`/${PATH_ROUTES.CATALOG_PATH}`}
                   className="d-flex flex-wrap justify-content-between"
                 >
                   <span>
                     <i className="icofont-double-right"></i>Ver Todos
                   </span>
-                  <span>({db.length})</span>
+                  {/* <span>({categories?.length ? categories?.length : 0 })</span> */}
                 </a>
               </li>
               {categories && categories.length > 0
                 ? // Mapeo de categories
-                  categories.map((data) => (
-                    <li key={data?.id}>
+                  categories.map((data, i) => (
+                    <li key={i}>
                       <Link
                         className={`d-flex flex-wrap justify-content-between ${
                           filters === data?.category ? "active" : ""
@@ -251,14 +247,14 @@ export const ShopNavComponentNew = ({
                           <i className="icofont-double-right"></i>
                           {data?.category}
                         </span>
-                        {/* <span>({length})</span> */}
+                          {/* <span>({categories.length})</span>  */}
                       </Link>
                     </li>
                   ))
                 : categoriesFhater &&
                   categoriesFhater.length > 0 &&
-                  categoriesFhater.map((data) => (
-                    <li key={data?.id}>
+                  categoriesFhater.map((data, i) => (
+                    <li key={i}>
                       <Link
                         className={`d-flex flex-wrap justify-content-between ${
                           filters === data?.category ? "active" : ""
@@ -276,7 +272,7 @@ export const ShopNavComponentNew = ({
                           <i className="icofont-double-right"></i>
                           {data?.category}
                         </span>
-                        {/* <span>({length})</span> */}
+                        {/* <span>({categoriesFhater?.length})</span>  */}
                       </Link>
                     </li>
                   ))}

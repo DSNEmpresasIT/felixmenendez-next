@@ -1,4 +1,5 @@
 import React from 'react'
+import "@/app/components/assets/paginationBlogPosts.css";
 import { BlogComponent } from '../components/blog/BlogComponent'
 
 const page = () => {
