@@ -11,5 +11,6 @@ export enum PATH_ROUTES {
   PRODUCTS_PATH = 'productos-felix-menendez/producto',
   CONTACT_PATH = 'contacto-felix-menendez-concordia-entre-rios-argentina',
   CATALOG_PATH = 'productos-felix-menendez',
-  BLOG_PATH = 'felix-menendez-ultimas-noticias'
+  BLOG_PATH = 'felix-menendez-ultimas-noticias',
+  NOT_FOUD_PATH = '404'
 }

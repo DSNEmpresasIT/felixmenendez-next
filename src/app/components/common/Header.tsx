@@ -1,4 +1,3 @@
-// Header.tsx
 'use client'
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -9,9 +8,9 @@ import { db } from '@/app/util/catalogData';
 import { getCategoriesFathers } from '@/app/services/Supabase/category-services';
 
 const Header = () => {
-  const pathname = usePathname();
-  
   const [categories, setCategories] = useState<Category[]>([]);
+  const [isBlackHeader, setIsBlackHeader] = useState(false);
+  const pathname = usePathname();
 
   const fetchCategories = async () => {
     const categoriesData = await getCategoriesFathers();
@@ -21,30 +20,29 @@ const Header = () => {
   };
 
   useEffect(() => {
-    if(categorias){
-      fetchCategories();
-    }
-  }, []);
+    fetchCategories();
+  }, []); 
 
+  useEffect(() => {
+    const isBlack = (actualRoute: PATH_ROUTES) => {
+      const conditionals = {
+        [PATH_ROUTES.HOME_PATH]: false,
+        [PATH_ROUTES.CONTACT_PATH]: false,
+        [PATH_ROUTES.CATALOG_PATH]: false,
+        [PATH_ROUTES.BLOG_PATH]: true,
+        [PATH_ROUTES.PRODUCTS_PATH]: true,
+        [PATH_ROUTES.NOT_FOUD_PATH]: true,
+      };
 
-  const isBlack = (actualRoute: PAGES) => {
-    const conditionals = {
-      [PAGES.HOME_PAGE]: false,
-      [PAGES.CONTACT_PAGE]: false,
-      [PAGES.CATALOG_PAGE]: false,
-      [PAGES.BLOG_PAGE]: false,
-      [PAGES.NOT_FOUND_PAGE]: true,
+      return conditionals[actualRoute] ?? false;
     };
 
-    return conditionals[actualRoute] ?? false;
-  };
+    setIsBlackHeader(isBlack(pathname.replace(/^\/+/, '') as any));
+  }, [pathname]);
 
- 
-
-  const categorias = ProductTypes;
 
   return (
-    <header className={`header-section transparent-header ${isBlack(pathname as PAGES) ? 'black-header' :  'white-header' }`}>
+    <header className={`header-section transparent-header` } style={isBlackHeader ? {backgroundColor: 'black', top: '0px'} : {top: '20px'}}>
       <div className="header-area">
         <div className="container">
           <nav className="navbar navbar-expand-lg">
