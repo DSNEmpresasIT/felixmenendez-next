@@ -1,13 +1,12 @@
 'use client'
 import React, { FC, useEffect, useState } from 'react';
 import { CardCartComponent } from './CardCartComponent';
-import type { Product, ProductData, ProductTypes } from '@/app/util/types';
-import { db } from '@/app/util/catalogData';
+import type { Product, ProductTypes } from '@/app/util/types';
 import { SearcherComponent } from './SearcherComponent';
 import { ShopNavComponentNew } from './ShopNavComponentNew';
 import ReactPaginate from "react-paginate";
-import Script from 'next/script';
-import { getAllProducts, getProductByName, getProductsByCategory } from '@/app/services/Supabase/product-services';
+import "@/app/components/assets/paginationBlogPosts.css";
+import { getAllProducts, getProductsByCategory } from '@/app/services/Supabase/product-services';
 interface ShopComponentProps {
   filter: ProductTypes | undefined;
 }
@@ -81,7 +80,12 @@ export const ShopComponent:FC<ShopComponentProps> = ({ filter }) => {
             <div className="col-lg-9 col-12">
               <article>
                 <div className="shop-title d-flex flex-wrap justify-content-between">
-                  {/* <p>{dataPaginate?.length} {ProductData.length > 1 ? `Resultados de ${ProductData.length}` : 'resultado'}</p> */}
+                    <p>
+                        {dataPaginate && dataPaginate.length}{' '}
+                        {ProductData && ProductData.length > 1
+                         ? `Resultados de ${ProductData.length}`
+                         : 'resultado'}
+                   </p>
                   <div className="product-view-mode">
                     <a className="active" data-target="grids"><i className="icofont-ghost"></i></a>
                     <a data-target="lists"><i className="icofont-listing-box"></i></a>
@@ -89,9 +93,10 @@ export const ShopComponent:FC<ShopComponentProps> = ({ filter }) => {
                 </div>
                 <div className="shop-product-wrap grids row justify-content-center">
                   {
-                    dataPaginate?.map((data) => {
+                    dataPaginate?.map((data, i) => {
                       return (
-                        <CardCartComponent
+                        < CardCartComponent
+                          key={i}
                           id={data.id}
                           name={data.name}
                           img={data.img}
@@ -107,7 +112,7 @@ export const ShopComponent:FC<ShopComponentProps> = ({ filter }) => {
                 <div  style={{ height: '150px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   { ProductData && ProductData.length > 5 && (
                   <ReactPaginate
-                    pageCount={Math.ceil(ProductData?.length / postsPerPage)}
+                    pageCount={Math.ceil((ProductData?.length || 0) / postsPerPage)}
                     pageRangeDisplayed={3}
                     marginPagesDisplayed={1}
                     onPageChange={(selected) => handlePageChange(selected.selected)}

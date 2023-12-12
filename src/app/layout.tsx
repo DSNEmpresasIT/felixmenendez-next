@@ -1,7 +1,6 @@
-// components/Layout.tsx
 import 'animate.css';
 import '@/app/components/assets/paginationBlogPosts.css';
-import React, { Children } from 'react';
+import React from 'react';
 import Header from '@/app/components/common/Header';
 import Footer from '@/app/components/common/Footer';
 import WhatsAppButtonComponent from '@/app/components/common/WhatsAppButtonComponent';
@@ -35,7 +34,6 @@ export default function RootLayout({children}:{children:React.ReactNode}) {
             <WhatsAppButtonComponent />
             <BackToTop />
           </BodyLayout>
-          
     </html>
   );
 };

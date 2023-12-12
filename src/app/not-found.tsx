@@ -1,7 +1,6 @@
 
 import React from 'react'
-import { PATH_ROUTES } from '../util/pages'
-import Script from 'next/script'
+import { PATH_ROUTES } from './util/pages'
 
 const NotFound = () => {
   return (
@@ -22,7 +21,6 @@ const NotFound = () => {
           </div>
       </div>
     </section>
-      {/*fore zero fore page ending here*/}
     <script src="/assets/js/jquery.js"/>
     <script src="/assets/js/fontawesome.min.js"/>
     <script src="/assets/js/waypoints.min.js"/>

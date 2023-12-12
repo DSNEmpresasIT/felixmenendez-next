@@ -1,7 +1,7 @@
 'use client'
+import { RelatedProductsSection } from '@/app/components/product-single/RelatedProductsSection';
 import { getProductById } from '@/app/services/Supabase/product-services';
 import { getProductSingleById } from '@/app/services/Supabase/productSingle-service';
-import { db } from '@/app/util/catalogData';
 import { PATH_ROUTES } from '@/app/util/pages';
 import { Product, ProductData, ProductSingle } from '@/app/util/types';
 import Link from 'next/link';
@@ -143,7 +143,7 @@ const page: FC<pageProps> =({params}) => {
                   </div>
                 </div>
               </div>
-              {/* <RelatedProductsSection productSelected={productSelected} client:load/> */}
+              {/* <RelatedProductsSection productSelected={productSelected}/> */}
             </div>
           </div>
         </div>

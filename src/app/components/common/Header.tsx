@@ -1,17 +1,15 @@
-// Header.tsx
 'use client'
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { PAGES, PATH_ROUTES } from '@/app/util/pages';
 import { Category, ProductTypes } from '@/app/util/types';
 import { usePathname } from 'next/navigation';
-import { db } from '@/app/util/catalogData';
 import { getCategoriesFathers } from '@/app/services/Supabase/category-services';
 
 const Header = () => {
-  const pathname = usePathname();
-  
   const [categories, setCategories] = useState<Category[]>([]);
+  const [isBlackHeader, setIsBlackHeader] = useState(false);
+  const pathname = usePathname();
 
   const fetchCategories = async () => {
     const categoriesData = await getCategoriesFathers();
@@ -21,30 +19,29 @@ const Header = () => {
   };
 
   useEffect(() => {
-    if(categorias){
-      fetchCategories();
-    }
-  }, []);
+    fetchCategories();
+  }, []); 
 
+  useEffect(() => {
+    const isBlack = (actualRoute: PATH_ROUTES) => {
+      const conditionals = {
+        [PATH_ROUTES.HOME_PATH]: false,
+        [PATH_ROUTES.CONTACT_PATH]: false,
+        [PATH_ROUTES.CATALOG_PATH]: false,
+        [PATH_ROUTES.BLOG_PATH]: true,
+        [PATH_ROUTES.PRODUCTS_PATH]: true,
+        [PATH_ROUTES.NOT_FOUD_PATH]: true,
+      };
 
-  const isBlack = (actualRoute: PAGES) => {
-    const conditionals = {
-      [PAGES.HOME_PAGE]: false,
-      [PAGES.CONTACT_PAGE]: false,
-      [PAGES.CATALOG_PAGE]: false,
-      [PAGES.BLOG_PAGE]: false,
-      [PAGES.NOT_FOUND_PAGE]: true,
+      return conditionals[actualRoute] ?? true;
     };
 
-    return conditionals[actualRoute] ?? false;
-  };
+    setIsBlackHeader(isBlack(pathname.replace(/^\/+/, '') as any));
+  }, [pathname]);
 
- 
-
-  const categorias = ProductTypes;
 
   return (
-    <header className={`header-section transparent-header ${isBlack(pathname as PAGES) ? 'black-header' :  'white-header' }`}>
+    <header className={`header-section transparent-header` } style={isBlackHeader ? {backgroundColor: 'black', top: '0px'} : {top: '20px'}}>
       <div className="header-area">
         <div className="container">
           <nav className="navbar navbar-expand-lg">
@@ -59,10 +56,10 @@ const Header = () => {
                 <div className="main-area">
                   <div className="main-menu">
                     <ul className="agri-ul">
-                      <li className={pathname === PATH_ROUTES.HOME_PATH ? 'active' : ''}><a href={PATH_ROUTES.HOME_PATH}>Home</a></li>
+                      <li className={pathname === PATH_ROUTES.HOME_PATH ? 'active' : ''}><a href={'/'}>Home</a></li>
                       <li className={pathname === PATH_ROUTES.BLOG_PATH ? 'active' : ''}><a href={`/${PATH_ROUTES.BLOG_PATH}`}>Noticias</a></li>
                       <li className={pathname === PATH_ROUTES.CATALOG_PATH ? 'active' : ''}>
-                        <a href={`/${PATH_ROUTES.CATALOG_PATH}`}>Productos</a>
+                        <Link href={`/${PATH_ROUTES.CATALOG_PATH}`}>Productos</Link>
                           <ul className="agri-ul">
                           {categories.map((category) => (
                               <li key={category.id}>
@@ -81,7 +78,7 @@ const Header = () => {
                           <li><a target="_blank" href="https://www.facebook.com/solucionesagropecuariasintegrales"><i style={{ marginRight: '10px' }} className="fa-brands fa-facebook"></i>Facebook</a></li>
                           <li><a target="_blank" href="https://www.instagram.com/felixmenendezsrl/"><i style={{ marginRight: '10px' }} className="fa-brands fa-instagram"></i> Instagram</a></li>
                           <li><a target="_blank" href="https://www.youtube.com/@lafarmaciadelcampo"><i style={{ marginRight: '10px' }} className="fa-brands fa-youtube"></i> Youtube</a></li>
-                          <li><a target="_blank" href="https://linktr.ee/felixmemendezsrl"><i style={{ marginRight: '10px' }} className="fa-solid fa-link"></i> Linktree</a></li>
+                          <li><a target="_blank" href="https://linktr.ee/felixmenendez"><i style={{ marginRight: '10px' }} className="fa-solid fa-link"></i> Linktree</a></li>
                         </ul>
                       </li>
                     </ul>
