@@ -112,7 +112,7 @@ export const ShopComponent:FC<ShopComponentProps> = ({ filter }) => {
                 <div  style={{ height: '150px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   { ProductData && ProductData.length > 5 && (
                   <ReactPaginate
-                    pageCount={Math.ceil((ProductData?.length || 0) / postsPerPage)}
+                    pageCount={Math.round(Math.ceil((ProductData?.length || 0) / postsPerPage))}
                     pageRangeDisplayed={3}
                     marginPagesDisplayed={1}
                     onPageChange={(selected) => handlePageChange(selected.selected)}

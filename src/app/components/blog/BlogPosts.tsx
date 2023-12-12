@@ -94,7 +94,7 @@ export const BlogPosts = () => {
       }
       <div className="" style={{ height: '150px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <ReactPaginate
-          pageCount={Math.ceil((state.facebookPostData?.length || 0) / postsPerPage)}
+          pageCount={Math.round(Math.ceil((state.facebookPostData?.length || 0) / postsPerPage))}
           pageRangeDisplayed={3}
           marginPagesDisplayed={1}
           onPageChange={(selected) => handlePageChange(selected.selected)}

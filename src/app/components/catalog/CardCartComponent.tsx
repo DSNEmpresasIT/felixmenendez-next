@@ -31,23 +31,23 @@ export const CardCartComponent:FC<Product> = ({ name , img ,  formulacion, is_ac
   return (
     <div key={id} className="col-lg-4 col-md-6 col-12 animate__animated animate__fadeIn" >
       <div  className="product-item" style={{minHeight:'28rem' }}>
-        <a href={`/${PATH_ROUTES.PRODUCTS_PATH}/${name?.split(' ').join('')}`}>
+        <Link href={`/${PATH_ROUTES.PRODUCTS_PATH}?id=${id.toString()}`}>
           <div className="product-thumb">
             <img src={ img  || `/assets/images/product/${image}/${image}.png`} alt="item" />
             <div className="product-action-link">
               <span><i className="icofont-link"></i></span>
             </div>
           </div>
-        </a>
+        </Link>
         <div className="product-content row" >
           <div className='col-12' style={{ display: 'flex', justifyContent: 'space-between' }}>
             <span>Nuevo</span>
             <span style={{ textTransform: 'capitalize', color: '#78bd41' }}>{filters}</span>
           </div>
           <h6 className='col-12 mt-2' style={{ fontWeight: '450', textAlign: 'start' }}>
-            <a href={`/${PATH_ROUTES.PRODUCTS_PATH}/${name?.split(' ').join('')}`}>
+            <Link href={`/${PATH_ROUTES.PRODUCTS_PATH}?id=${id.toString()}`}>
               {name} 
-            </a>
+            </Link>
           </h6>
           {
             formulacion && (
@@ -65,10 +65,10 @@ export const CardCartComponent:FC<Product> = ({ name , img ,  formulacion, is_ac
         <div className="product-thumb">
         <img src={img ?? `/assets/images/product/${image}/${image}.png`} alt="item" />
           <div className="product-action-link">
-            <a
-              href={`/${PATH_ROUTES.PRODUCTS_PATH}/${name?.split(' ').join('')}`}
+            <Link
+              href={`/${PATH_ROUTES.PRODUCTS_PATH}?id=${id.toString()}`}
               ><i className="icofont-eye"></i>
-            </a>
+            </Link>
           </div>
         </div>
         <div className="product-content row">
@@ -76,7 +76,7 @@ export const CardCartComponent:FC<Product> = ({ name , img ,  formulacion, is_ac
             <span>Nuevo</span>
             <span style={{ textTransform: 'capitalize', color: '#78bd41' }}>{filters}</span>
           </div>
-          <h6><a href="#">{name}</a></h6>
+          <h6><Link href="#">{name}</Link></h6>
           {/* <p style={{ maxHeight: '100px', overflow: 'hidden', textOverflow: 'ellipsis' }}>{description}</p> */}
           <div className='d-flex mt-3 justify-content-between'>
             <CardButton id={id.toString()} />
