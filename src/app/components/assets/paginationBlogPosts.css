@@ -1,3 +1,9 @@
+.pagination button {
+  opacity: 1;
+  cursor: pointer;
+  border: none; 
+}
+
 .pagination {
     margin: 40px 0;
   }
@@ -16,7 +22,10 @@
     align-items: center;
   }
   
-  .pagination .page-num {
+  .pagination .page-num,
+  .pagination > li,
+  .pagination > button {
+    cursor: pointer;
     display: flex;
     gap: 1rem;
     width: 46px;
@@ -28,6 +37,18 @@
     z-index: 1;
     border-radius: 50%;
     transition: all 0.3s ease;
+  }
+
+  .pagination > button {
+    background-color: #f7f7f7;
+    color: #ffb11f;
+    font-size: 2rem;
+  }
+
+  .pagination > button:disabled{
+    border-color: #a5a5a5;
+    color: #ffb11f8e;
+    cursor: not-allowed;
   }
   
   .pagination .active,

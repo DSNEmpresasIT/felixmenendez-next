@@ -5,6 +5,7 @@ import { PATH_ROUTES } from "@/app/util/pages";
 import { getFormatDate } from "@/app/util/getDateFormat";
 import { BlogTypes } from "@/app/context/types/blog";
 import { useBlogContext } from "@/app/context/blog-context";
+import CustomPagination from "../paginator/Paginator";
 
 export const BlogPosts = () => {
   const { state, dispatch }: any = useBlogContext();
@@ -93,23 +94,9 @@ export const BlogPosts = () => {
         })
       }
       <div className="" style={{ height: '150px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <ReactPaginate
-          pageCount={Math.round(Math.ceil((state.facebookPostData?.length || 0) / postsPerPage))}
-          pageRangeDisplayed={3}
-          marginPagesDisplayed={1}
-          onPageChange={(selected) => handlePageChange(selected.selected)}
-          containerClassName="pagination"
-          activeClassName="active"
-          nextLabel=">"
-          previousLabel="<"
-          pageLinkClassName="page-num"
-          previousLinkClassName="page-num"
-          nextLinkClassName="page-num"
-          breakLabel="..."
-          renderOnZeroPageCount={null}
-          hrefBuilder={() => {
-            window.scrollTo(0, 0);
-            }}
+       <CustomPagination
+           pageCount={Math.round(Math.ceil((state.facebookPostData?.length || 0) / postsPerPage))}
+           onPageChange={handlePageChange}
         />
       </div>
     </article>

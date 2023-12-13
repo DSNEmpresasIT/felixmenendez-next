@@ -7,6 +7,7 @@ import { ShopNavComponentNew } from './ShopNavComponentNew';
 import ReactPaginate from "react-paginate";
 import "@/app/components/assets/paginationBlogPosts.css";
 import { getAllProducts, getProductsByCategory } from '@/app/services/Supabase/product-services';
+import CustomPagination from '../paginator/Paginator';
 interface ShopComponentProps {
   filter: ProductTypes | undefined;
 }
@@ -110,7 +111,7 @@ export const ShopComponent:FC<ShopComponentProps> = ({ filter }) => {
                   }
                 </div>
                 <div  style={{ height: '150px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  { ProductData && ProductData.length > 5 && (
+                  {/* { ProductData && ProductData.length > 5 && (
                   <ReactPaginate
                     pageCount={Math.round(Math.ceil((ProductData?.length || 0) / postsPerPage))}
                     pageRangeDisplayed={3}
@@ -129,7 +130,14 @@ export const ShopComponent:FC<ShopComponentProps> = ({ filter }) => {
                       }
                     }
                     renderOnZeroPageCount={null}
-                  />)}
+                  />)} */}
+                {ProductData && ProductData.length > 5 && (
+                      <CustomPagination
+                            pageCount={Math.round(Math.ceil((ProductData?.length || 0) / postsPerPage))}
+                            onPageChange={handlePageChange}
+                      />
+                )}
+
                 </div>
               </article>
             </div>
