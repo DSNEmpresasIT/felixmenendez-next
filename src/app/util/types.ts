@@ -101,6 +101,7 @@ export interface Product {
   created_at: Date;
   is_active_substance?: boolean | null;
   filters?: string;
+  type:string | null;
 }
 
 export interface Category {

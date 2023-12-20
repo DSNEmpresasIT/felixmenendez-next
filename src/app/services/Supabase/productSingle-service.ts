@@ -1,3 +1,4 @@
+import { ProductFeature } from "@/app/productos-felix-menendez/producto/page";
 import { ProductSingle } from "@/app/util/types";
 import { createClient } from "@supabase/supabase-js";
 
@@ -12,7 +13,7 @@ if (!MAIN_SUPABASE_URL || !MAIN_SUPABASE_KEY) {
 const supabase = createClient(MAIN_SUPABASE_URL, MAIN_SUPABASE_KEY)
 
 
-export const getProductSingleById = async (id : string):Promise<ProductSingle | null > => {
+export const getProductSingleById = async (id : string):Promise<ProductFeature | null > => {
     try {
         const {data, error} = await supabase
         .from('productFeature')
@@ -20,7 +21,7 @@ export const getProductSingleById = async (id : string):Promise<ProductSingle | 
         .eq('product_id', id)
         
 
-        return data as ProductSingle | null;
+        return data as ProductFeature | null;
     } catch (error) {
         return null
     }

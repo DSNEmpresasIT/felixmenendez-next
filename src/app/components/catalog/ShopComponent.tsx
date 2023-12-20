@@ -8,11 +8,13 @@ import ReactPaginate from "react-paginate";
 import "@/app/components/assets/paginationBlogPosts.css";
 import { getAllProducts, getProductsByCategory } from '@/app/services/Supabase/product-services';
 import CustomPagination from '../paginator/Paginator';
+import { useSearchParams } from 'next/navigation';
 interface ShopComponentProps {
   filter: ProductTypes | undefined;
 }
 
 export const ShopComponent:FC<ShopComponentProps> = ({ filter }) => {
+  const type: string | null = useSearchParams().get("type");
   const [ filters, setFilters ] = useState<string | undefined>(undefined); 
   const [ProductData, setProductData] = useState<Product[] | null>(null);
   const [currentPage, setCurrentPage] = useState(0);
@@ -104,7 +106,8 @@ export const ShopComponent:FC<ShopComponentProps> = ({ filter }) => {
                           formulacion={data.formulacion}
                           is_active_substance={data.is_active_substance} 
                           created_at={data.created_at}                                                  
-                          filters={filters}                        
+                          filters={filters}
+                          type={type}                       
                         />
                       )
                     })
