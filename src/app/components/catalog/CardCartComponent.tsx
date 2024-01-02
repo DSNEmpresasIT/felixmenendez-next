@@ -127,7 +127,7 @@ export const CardCartComponent: FC<CardCartComponentProps> = ({ data }) => {
             />
             <button
               style={{
-                width: "140px",
+                width: "100px",
                 height: "30px",
                 fontSize: "15px",
                 display: "flex",
@@ -139,7 +139,7 @@ export const CardCartComponent: FC<CardCartComponentProps> = ({ data }) => {
               className="lab-btn"
               onClick={handleAddToCart}
             >
-              <span>Agregar al Carrito </span>
+              <span>Cotizar</span>
             </button>
           </div>
         </div>

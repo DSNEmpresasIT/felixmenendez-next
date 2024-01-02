@@ -12,8 +12,6 @@ export const addToCart = (product: Product): void => {
   } else {
     cart.push({ product, quantity: 1 });
   }
-
-  // Llamar al callback para notificar al componente sobre el cambio en el carrito
   updateCallback();
 };
 
@@ -23,7 +21,6 @@ export const removeFromCart = (productId: string): void => {
     cart.splice(index, 1);
   }
 
-  // Llamar al callback para notificar al componente sobre el cambio en el carrito
   updateCallback();
 };
 
@@ -31,7 +28,7 @@ export const getCart = (): CartItem[] => {
   return [...cart];
 };
 
-// Función para registrar un callback de actualización
 export const registerUpdateCallback = (callback: () => void): void => {
   updateCallback = callback;
 };
+// https://www.flaticon.es/icono-gratis/pago_2761101?term=cotizaci%C3%B3n&page=1&position=4&origin=tag&related_id=2761101

@@ -10,23 +10,17 @@ const Cart: React.FC<{ isCartVisible: boolean; toggleCartVisibility: () => void 
   const [cart, setCart] = useState(getCart());
 
   useEffect(() => {
-    // Registrar un callback para que el componente se actualice cuando cambie el carrito
     const updateCallback = () => {
       setCart(getCart());
     };
 
     registerUpdateCallback(updateCallback);
 
-    // Eliminar el callback al desmontar el componente
     return () => {
       registerUpdateCallback(() => {});
     };
   }, []);
 
-  /*TODO: [] hacer funcion para mostrar y ocultar el carrito.
-          [] Crear formulario para enviar a whatsapp.
-          [] Mejorar estilos de botones en cart.
-  */
 
   const handleRemoveFromCart = (productId: string) => {
     removeFromCart(productId);
@@ -84,7 +78,8 @@ const Cart: React.FC<{ isCartVisible: boolean; toggleCartVisibility: () => void 
           <span>Consultar Carrito</span>
         </Link>
       </div>
-    </div>
+
+</div>
   );
 };
 
