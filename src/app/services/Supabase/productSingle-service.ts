@@ -12,17 +12,25 @@ if (!MAIN_SUPABASE_URL || !MAIN_SUPABASE_KEY) {
 
 const supabase = createClient(MAIN_SUPABASE_URL, MAIN_SUPABASE_KEY)
 
-
-export const getProductSingleById = async (id : string):Promise<ProductFeature | null > => {
+export const getProductSingleById = async (id: string): Promise<ProductFeature | null> => {
     try {
-        const {data, error} = await supabase
+      const { data, error } = await supabase
         .from('productFeature')
-        .select('product_id')
-        .eq('product_id', id)
-        
-
-        return data as ProductFeature | null;
+        .select('*')
+        .eq('product_id', id);
+  
+      if (error) {
+        console.error('Error fetching data:', error);
+        return null;
+      }
+      if (data && data.length > 0) {
+        return data[0] as ProductFeature;
+      } else {
+        console.warn('No product found with ID:', id);
+        return null;
+      }
     } catch (error) {
-        return null
+      console.error('Error:', error);
+      return null;
     }
-}
+  };

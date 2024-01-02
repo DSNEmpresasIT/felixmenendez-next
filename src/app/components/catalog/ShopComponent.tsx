@@ -9,6 +9,7 @@ import "@/app/components/assets/paginationBlogPosts.css";
 import { getAllProducts, getProductsByCategory } from '@/app/services/Supabase/product-services';
 import CustomPagination from '../paginator/Paginator';
 import { useSearchParams } from 'next/navigation';
+import Cart from '../cart/cart-component';
 interface ShopComponentProps {
   filter: ProductTypes | undefined;
 }
@@ -69,6 +70,7 @@ export const ShopComponent:FC<ShopComponentProps> = ({ filter }) => {
 
   return (
     <>
+   
     <div className="shop-page padding-tb">
       <div className="container">
         <div className="section-wrapper">
@@ -99,15 +101,7 @@ export const ShopComponent:FC<ShopComponentProps> = ({ filter }) => {
                     dataPaginate?.map((data, i) => {
                       return (
                         < CardCartComponent
-                          key={i}
-                          id={data.id}
-                          name={data.name}
-                          img={data.img}
-                          formulacion={data.formulacion}
-                          is_active_substance={data.is_active_substance} 
-                          created_at={data.created_at}                                                  
-                          filters={filters}
-                          type={type}                       
+                          data={data}        
                         />
                       )
                     })

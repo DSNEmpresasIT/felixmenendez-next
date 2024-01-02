@@ -1,9 +1,9 @@
-import { TechnicalDetails } from '@/app/productos-felix-menendez/producto/page'
+import { ProductFeature } from '@/app/productos-felix-menendez/producto/page'
 import Link from 'next/link'
 import React from 'react'
 
 interface Props {
-    technicalDetails: TechnicalDetails | undefined
+    technicalDetails: ProductFeature | null
 }
 
 const tecnicalDetails = ({technicalDetails}: Props) => {

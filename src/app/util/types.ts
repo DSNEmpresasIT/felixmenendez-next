@@ -101,6 +101,7 @@ export interface Product {
   created_at: Date;
   is_active_substance?: boolean | null;
   filters?: string;
+  brand?:string;
   type:string | null;
 }
 

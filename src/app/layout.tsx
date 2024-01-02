@@ -1,5 +1,6 @@
 import 'animate.css';
 import '@/app/components/assets/paginationBlogPosts.css';
+import '@/app/components/cart/cart-styles.css'
 import React from 'react';
 import Header from '@/app/components/common/Header';
 import Footer from '@/app/components/common/Footer';

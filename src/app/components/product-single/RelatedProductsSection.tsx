@@ -21,8 +21,12 @@ export const RelatedProductsSection: FC<RelatedProductsSectionProps> = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const products = await getProductsByCategory(categorie as string);
+        const categoryToFetch =
+        categorie === 'undefined' || categorie === undefined || categorie === 'null'
+          ? 'granulados'
+          : categorie || 'granulados';
 
+      const products = await getProductsByCategory(categoryToFetch);
         if (products) {
           // Select related products excluding the selected product, up to 5
           const selectedProducts: Product[] = [];

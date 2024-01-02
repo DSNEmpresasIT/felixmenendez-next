@@ -1,9 +1,9 @@
-import { PrincipalInfo, ProductFeature } from "@/app/productos-felix-menendez/producto/page";
+import {  ProductFeature } from "@/app/productos-felix-menendez/producto/page";
 
 import React from "react";
 
 interface Props {
-  principalInfo: PrincipalInfo | undefined
+  principalInfo: ProductFeature | null
 }
 
 const principalInfo = ({principalInfo}: Props) => {

@@ -17,19 +17,11 @@ export interface ProductFeature {
   pdffiles: string,
   safetyDataSheet: string,
   description: string,
-  technicalDetails: TechnicalDetails,
-  principalInfo: PrincipalInfo
-}
-
-export interface TechnicalDetails {
   modeOfAction: string,
   actionSite: string,
   formulation: string,
   toxicologicalClassification: string,
-  presentation: string
-}
-
-export interface PrincipalInfo {
+  presentation: string,
   activeIngredient: string,
   weedType: string,
   applicationTimingCrops: string,
@@ -37,6 +29,7 @@ export interface PrincipalInfo {
   actionForm: string,
   applicationLocation: string
 }
+
 
 const page =() => {
   const path  = useSearchParams().get("id");

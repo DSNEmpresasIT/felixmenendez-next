@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PrincipalInfo from './principalInfo';
 import TecnicalDetails from './tecnicalDetails';
 import Link from 'next/link';
@@ -17,12 +17,20 @@ const NavDetails = ({data, categorie, type}: Props) => {
     setActiveTab(tabKey);
   };
 
+  useEffect(() => {
+    if (data) {
+      renderContent();
+    }
+  }, [data]);
+  
+
   const renderContent = () => {
+   
     switch (activeTab) {
       case 'principal':
-        return <PrincipalInfo principalInfo={data?.principalInfo}/>;
+        return <PrincipalInfo principalInfo={data}/>;
       case 'tecnical':
-        return <TecnicalDetails technicalDetails={data?.technicalDetails} />;
+        return <TecnicalDetails technicalDetails={data} />;
       default:
         return null;
     }
