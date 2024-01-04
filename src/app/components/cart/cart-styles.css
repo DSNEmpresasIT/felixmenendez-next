@@ -88,3 +88,6 @@
   padding: 0px 30px;
   width: 90%;
 }
+.icon-quotation :hover {
+  position: absolute;
+}

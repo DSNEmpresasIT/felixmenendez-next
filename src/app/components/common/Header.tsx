@@ -6,6 +6,7 @@ import { Category, ProductTypes } from "@/app/util/types";
 import { usePathname } from "next/navigation";
 import { getCategoriesFathers } from "@/app/services/Supabase/category-services";
 import Cart from "../cart/cart-component";
+import QuotationIcon from "../assets/quotationIcon";
 
 const Header = () => {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -180,11 +181,15 @@ const Header = () => {
                       </li>
                       <li
                         className={
-                          pathname === PATH_ROUTES.CONTACT_PATH ? "active" : ""
+                          `${pathname === PATH_ROUTES.CONTACT_PATH ? "active" : ""} d-flex `
+                          
                         }
                       >
-                        <Link href={{}} onClick={toggleCartVisibility}>
+                        <Link  href={{}} onClick={toggleCartVisibility}>
                           Carrito
+                          <span className="align-items-top ms-1">
+                          <QuotationIcon width="31" height="31" />
+                          </span>
                         </Link>
                       </li>
                     </ul>

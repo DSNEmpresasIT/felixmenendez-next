@@ -5,6 +5,7 @@ import {
   registerUpdateCallback,
 } from "./cart-service";
 import Link from "next/link";
+import QuotationIcon from "../assets/quotationIcon";
 
 const Cart: React.FC<{ isCartVisible: boolean; toggleCartVisibility: () => void }> = ({ isCartVisible, toggleCartVisibility }) => {
   const [cart, setCart] = useState(getCart());
@@ -68,14 +69,15 @@ const Cart: React.FC<{ isCartVisible: boolean; toggleCartVisibility: () => void 
           )}
         </div>
       </div>
-      <div className="  d-flex mb-2 justify-content-end px-3">
+      <div className=" d-flex mb-2 justify-content-end px-3">
         <Link
           href={{}}
-          className="bg-warning p-2 button lab-btn text-white d-flex"
+          className="bg-warning align-items-center p-2 button lab-btn text-white d-flex"
         >
-          {" "}
-          <span className="icofont-external-link d-flex me-1 align-items-center"></span>{" "}
-          <span>Consultar Carrito</span>
+          <span className="me-1 ">Consultar Carrito</span>
+          <span className="icon-Quotation">
+          <QuotationIcon width="35" height="35" />
+          </span>
         </Link>
       </div>
 
