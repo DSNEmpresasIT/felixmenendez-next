@@ -43,7 +43,7 @@ const Cart: React.FC<{
 
   const generateWhatsAppMessage = () => {
     const cartMessage = cart
-      .map((item) => `${item.product.name}: ${item.quantity} unidades`)
+      .map((item) => `${item.product.name}: ${item.quantity} unidades.`)
       .join("\n");
     const initialMessage =
       "Hola, te hablo desde la página web. Me gustaría consultar la cotización de los siguientes productos:\n\n";
@@ -81,7 +81,7 @@ const Cart: React.FC<{
                     <span className="col md-col-4">{item.product.name}</span>
                     <div className="d-flex col md-col-6 ">
                       <button
-                        className="p-1 flex w-1  btn align-items-center"
+                        className="p-1 flex w-1 btnFocus align-items-center"
                         onClick={() =>
                           decreaseQuantity(item.product.id.toString())
                         }
@@ -101,7 +101,7 @@ const Cart: React.FC<{
                         }
                       />
                       <button
-                        className="p-1 flex btn align-items-center"
+                        className="p-1 flex btnFocus  align-items-center"
                         onClick={() =>
                           increaseQuantity(item.product.id.toString())
                         }
