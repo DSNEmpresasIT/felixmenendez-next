@@ -24,6 +24,38 @@ export const removeFromCart = (productId: string): void => {
   updateCallback();
 };
 
+export const decreaseQuantity = (productId: string): void => {
+  const index = cart.findIndex((item) => item.product.id.toString() === productId);
+  if (index !== -1) {
+    const currentItem = cart[index];
+
+    if (currentItem.quantity > 1) {
+      currentItem.quantity -= 1;
+    } else {
+      cart.splice(index, 1);
+    }
+  }
+
+  updateCallback();
+};
+
+export const increaseQuantity = (productId: string): void => {
+  const index = cart.findIndex((item) => item.product.id.toString() === productId);
+  if (index !== -1) {
+    cart[index].quantity += 1;
+  }
+
+  updateCallback();
+};
+
+export const updateCartItemQuantity = (productId: string, newQuantity: number) => {
+  const index = cart.findIndex((item) => item.product.id.toString() === productId);
+  if (index !== -1) {
+    cart[index].quantity = newQuantity;
+    updateCallback();
+  }
+};
+
 export const getCart = (): CartItem[] => {
   return [...cart];
 };
@@ -31,4 +63,3 @@ export const getCart = (): CartItem[] => {
 export const registerUpdateCallback = (callback: () => void): void => {
   updateCallback = callback;
 };
-// https://www.flaticon.es/icono-gratis/pago_2761101?term=cotizaci%C3%B3n&page=1&position=4&origin=tag&related_id=2761101

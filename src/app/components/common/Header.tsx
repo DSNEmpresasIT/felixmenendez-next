@@ -186,10 +186,10 @@ const Header = () => {
                         }
                       >
                         <Link  href={{}} onClick={toggleCartVisibility}>
-                          Carrito
-                          <span className="align-items-top ms-1">
+                          Cotización
+                          {/* <span className="align-items-top ms-1">
                           <QuotationIcon width="31" height="31" />
-                          </span>
+                          </span> */}
                         </Link>
                       </li>
                     </ul>
