@@ -14,7 +14,11 @@ export const getAllProducts = async (): Promise<Product[] | null> => {
   try {
     const { data } = await supabase
     .from('products')
-    .select('*')
+    .select(`
+          *,
+          supplier: supplier(name)
+        `)
+    
     return data as Product[] | null
   } catch (error) {
     return null
@@ -25,7 +29,10 @@ export const getProductByName= async(productName:string):Promise<Product[] | nul
   try {
     const { data } = await supabase
     .from('products')
-    .select('*')
+    .select(`
+          *,
+          supplier: supplier(name)
+        `)
     .ilike('name', `%${productName}%`)
     return data as Product[] | null
   } catch (error) {
@@ -58,7 +65,10 @@ export const getProductsByNameInCategory = async (category: string, query: strin
           // Paso 3: Obtener los detalles de los productos con la condición de nombre
           const productDetails = await supabase
             .from('products')
-            .select('*')
+            .select(`
+            *,
+            supplier: supplier(name)
+          `)
             .in('id', productIds)
             .ilike('name', `%${query}%`);
 
@@ -102,7 +112,10 @@ export const getProductsByCategory = async (category: string): Promise<Product[]
           // traer todos los productos con las IDs buscadas en products_categories 
           const productDetails = await supabase
             .from('products')
-            .select('*')
+            .select(`
+            *,
+            supplier: supplier(name)
+          `)
             .in('id', productIds);
 
           if (productDetails.data) {

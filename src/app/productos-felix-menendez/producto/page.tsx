@@ -98,8 +98,9 @@ const page =() => {
                             <div className="shop-item">
                               <div className="shop-thumb">
                                 <img
+                                  className='rounded'
                                   width="100%"
-                                  src={productSelected?.img ? `/assets/images/product/${productSelected?.img}/${productSelected?.img}.png` : '/assets/images/product/solubles/solubles.png'}
+                                  src={productSelected?.img ? productSelected?.img : '/assets/images/product/solubles/solubles.png'}
                                   alt="shop-single"
                                 />
                               </div>

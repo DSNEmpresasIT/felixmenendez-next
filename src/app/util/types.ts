@@ -101,8 +101,12 @@ export interface Product {
   created_at: Date;
   is_active_substance?: boolean | null;
   filters?: string;
-  brand?:string;
   type:string | null;
+  supplier?: {
+    name: string;
+  } | null;
+  supplier_id?: number | undefined;
+  unid?: string;
 }
 
 export interface Category {

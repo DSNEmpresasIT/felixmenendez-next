@@ -89,7 +89,7 @@ const Cart: React.FC<{
                         -
                       </button>
                       <input
-                        className="inputCart"
+                        className="inputCart me-0"
                         type="text"
                         name="qtybutton"
                         value={item.quantity}
@@ -100,6 +100,8 @@ const Cart: React.FC<{
                           )
                         }
                       />
+                      <div className="flex ms-0 m-auto text-secondary ">{item.product.unid ? `(${item.product.unid})` : item.product.unid}</div>
+
                       <button
                         className="p-1 flex btnFocus  align-items-center"
                         onClick={() =>
@@ -108,6 +110,7 @@ const Cart: React.FC<{
                       >
                         +
                       </button>
+
                     </div>
                     <span
                       className="d-flex  col md-col-2 justify-content-center"

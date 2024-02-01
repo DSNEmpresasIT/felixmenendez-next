@@ -55,14 +55,14 @@ export const CardCartComponent: FC<CardCartComponentProps> = ({ data }) => {
       key={data.id}
       className="col-lg-4 col-md-6 col-12 animate__animated animate__fadeIn"
     >
-      <div className="product-item" style={{ minHeight: "28rem" }}>
+      <div className="product-item rounded" style={{ minHeight: "28rem" }}>
         <Link
           href={`/${PATH_ROUTES.PRODUCTS_PATH}?id=${data.id.toString()}&type=${
             data.type
           }&categoria=${data.filters}`}
         >
           <div className="product-thumb">
-            <img
+            <img className="rounded"
               src={data.img || `/assets/images/product/${image}/${image}.png`}
               alt="item"
             />
@@ -78,14 +78,21 @@ export const CardCartComponent: FC<CardCartComponentProps> = ({ data }) => {
             className="col-12"
             style={{ display: "flex", justifyContent: "space-between" }}
           >
-            <span>Nuevo</span>
+            <span>{data.supplier?.name }</span>
             <span style={{ textTransform: "capitalize", color: "#78bd41" }}>
               {data.filters}
             </span>
           </div>
           <h6
-            className="col-12 mt-2"
-            style={{ fontWeight: "450", textAlign: "start" }}
+            className="col-12 mt-2 d-inline-block"
+            style={{
+              maxWidth: "250px",
+              fontWeight: "450",
+              textAlign: "start",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+            }}
           >
             <Link
               href={`/${
@@ -118,8 +125,10 @@ export const CardCartComponent: FC<CardCartComponentProps> = ({ data }) => {
                 {data.formulacion ?? ""}
               </span>
             </div>
-          ): (<div className="p-2 my-1"></div>)}
-          <div className="col-12 mt-1 d-flex gap-1 ">
+          ) : (
+            <div className="p-2 my-1"></div>
+          )}
+          <div key={data.id} className="col-12 mt-1 d-flex gap-1 ">
             <CardButton
               id={data.id.toString()}
               categoria={data.filters}
@@ -167,7 +176,7 @@ export const CardCartComponent: FC<CardCartComponentProps> = ({ data }) => {
             className="col-12"
             style={{ display: "flex", justifyContent: "space-between" }}
           >
-            <span>{data.brand ?? "Nuevo"}</span>
+            <span>{data.supplier?.name }</span>
             <span style={{ textTransform: "capitalize", color: "#78bd41" }}>
               {data.filters}
             </span>

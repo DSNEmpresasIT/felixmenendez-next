@@ -93,7 +93,8 @@ export const ShopComponent:FC<ShopComponentProps> = ({ filter }) => {
                    </p>
                   <div className="product-view-mode">
                     <a className="active" data-target="grids"><i className="icofont-ghost"></i></a>
-                    <a data-target="lists"><i className="icofont-listing-box"></i></a>
+                    {// <a data-target="lists"><i className="icofont-listing-box"></i></a> 
+                    }
                   </div>
                 </div>
                 <div className="shop-product-wrap grids row justify-content-center">
