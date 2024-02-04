@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { PATH_ROUTES } from "@/app/util/pages";
 import { Category, Product, ProductData, ProductTypes } from "@/app/util/types";
 import {
@@ -8,16 +8,19 @@ import {
 } from "@/app/services/Supabase/category-services";
 import {  useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { getProductByFhaterCategory } from "@/app/services/Supabase/product-services";
 
 
 
 
 export const ShopNavComponentNew = ({
+  setProductData,
   handleSetFilter,
   updateFilteredData,
   filters,
   productsLength,
 }: {
+  setProductData: Dispatch<SetStateAction<Product[] | null>>;
   handleSetFilter: (category: string) => void;
   updateFilteredData: () => void;
   filters: string | undefined;
@@ -71,6 +74,10 @@ export const ShopNavComponentNew = ({
     const categories = await getCategoriesChildren(filter);
     setCategories(categories);
     console.log(filters);
+
+    // brings all the products of the child categories by the father category
+    const productsByFhaterCategory = await getProductByFhaterCategory(filter);
+    setProductData(productsByFhaterCategory);
   };
 
   const getFathersCategories = async () => {

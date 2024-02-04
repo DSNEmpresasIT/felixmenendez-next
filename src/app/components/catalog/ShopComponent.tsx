@@ -78,7 +78,7 @@ export const ShopComponent:FC<ShopComponentProps> = ({ filter }) => {
             <div className="col-lg-3 col-md-7 col-12">
               <aside>
                 <SearcherComponent setProductData={setProductData} updateFilteredData={handleUpdateFilterData}  /> 
-                <ShopNavComponentNew handleSetFilter={handleSetFilter} updateFilteredData={handleUpdateFilterData} filters={filters} productsLength={ProductData ? ProductData.length : 0}
+                <ShopNavComponentNew setProductData={setProductData} handleSetFilter={handleSetFilter} updateFilteredData={handleUpdateFilterData} filters={filters} productsLength={ProductData ? ProductData.length : 0}
 />
               </aside>
             </div>

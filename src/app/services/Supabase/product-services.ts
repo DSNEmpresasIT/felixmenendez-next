@@ -42,7 +42,7 @@ export const getProductByName= async(productName:string):Promise<Product[] | nul
 
 export const getProductsByNameInCategory = async (category: string, query: string): Promise<Product[] | null> => {
   try {
-    // Paso 1: Obtener el ID de la categoría
+    // Step 1: Get the ID of the category
     const categoryResponse = await supabase
       .from('categories')
       .select('id')
@@ -52,17 +52,17 @@ export const getProductsByNameInCategory = async (category: string, query: strin
       const categoryId = categoryResponse.data[0]?.id;
 
       if (categoryId) {
-        // Paso 2: Obtener los IDs de los productos en la categoría
+        // Step 2: Get the IDs of the products in the category  
         const { data, error } = await supabase
           .from('products_categories')
           .select('product_id')
           .eq('category_id', categoryId);
 
         if (data) {
-          // Mapear los IDs de productos
+          // Map the product IDs
           const productIds = data.map(item => item.product_id);
 
-          // Paso 3: Obtener los detalles de los productos con la condición de nombre
+          // Step 3: Get the details of the products with the condition of the name
           const productDetails = await supabase
             .from('products')
             .select(`
@@ -73,14 +73,14 @@ export const getProductsByNameInCategory = async (category: string, query: strin
             .ilike('name', `%${query}%`);
 
           if (productDetails.data) {
-            // Devolver los detalles de los productos
+            // Return the details of the products
             return productDetails.data as Product[];
           }
         }
       }
     }
   } catch (error) {
-    console.error('Error al obtener los productos:', error);
+    console.error('Error fetching products in getProductsByNameInCategory error:', error);
   }
 
   return null;
@@ -89,7 +89,7 @@ export const getProductsByNameInCategory = async (category: string, query: strin
 
 export const getProductsByCategory = async (category: string): Promise<Product[] | null> => {
   try {
-    // Paso 1: Obtener el ID de la categoría 'Fertilizantes'
+    // Step 1: Get the ID of the category 'Fertilizantes'
     const categoryResponse = await supabase
       .from('categories')
       .select('id')
@@ -99,17 +99,17 @@ export const getProductsByCategory = async (category: string): Promise<Product[]
       const categoryId = categoryResponse.data[0]?.id;
 
       if (categoryId) {
-        // Paso 2: Usar el ID de la categoría en la consulta de productos
+        // Step 2: Use the category ID in the products_categories query
         const { data, error } = await supabase
           .from('products_categories')
           .select('product_id')
           .eq('category_id', categoryId);
 
         if (data) {
-          // Mapea los IDs de productos
+          // Map the product IDs  
           const productIds = data.map(item => item.product_id);
 
-          // traer todos los productos con las IDs buscadas en products_categories 
+          // Get all the products with the IDs searched in products_categories  
           const productDetails = await supabase
             .from('products')
             .select(`
@@ -125,11 +125,66 @@ export const getProductsByCategory = async (category: string): Promise<Product[]
       }
     }
   } catch (error) {
-    console.error('Error fetching products:', error);
+    console.error('Error fetching products getProductsByCategory:', error);
   }
 
   return null;
 };
+
+export const getProductByFhaterCategory = async (category: string): Promise<Product[] | null> =>
+ {
+  try {
+    // Step 1: get the ID of the category example 'Fertilizantes'
+    const categoryResponse = await supabase
+      .from('categories')
+      .select('id')
+      .ilike('category', `%${category}%`);
+
+    if (categoryResponse.data) {
+      const categoryId = categoryResponse.data[0]?.id;
+
+      if (categoryId) {
+        // Step 2: Get the IDs of the subcategories
+        const subcategories  = await supabase
+          .from('categories')
+          .select('id')
+          .eq('father_category', categoryId);
+          
+          const subCategoriesids = subcategories.data?.map(item => item.id);
+
+        // Step 3: Use the IDs of the subcategories in the products_categories query
+        const { data, error } = await supabase
+          .from('products_categories')
+          .select('product_id')
+          .in('category_id', subCategoriesids || []);
+
+        if (data) {
+          // Map the product IDs 
+
+          const productIds = data.map(item => item.product_id);
+
+          // get all the products with the IDs searched in products_categories
+          const productDetails = await supabase
+            .from('products')
+            .select(`
+            *,
+            supplier: supplier(name)
+          `)
+            .in('id', productIds);
+
+          if (productDetails.data) {
+            return productDetails.data as Product[];
+          }
+        }
+      }
+    }
+  } catch (error) {
+    console.error('Error fetching products getProductByFhaterCategory :', error);
+  }
+
+  return null;
+ }
+
 
 
 export const getProductById = async (product_id: string): Promise<Product | null> => {
@@ -141,9 +196,7 @@ export const getProductById = async (product_id: string): Promise<Product | null
 
     return productDetails.data![0] || null;
   } catch (error) {
-    console.error('Error fetching product details:', error);
+    console.error('Error fetching product details getProductById :', error);
     return null;
   }
 };
-
-
