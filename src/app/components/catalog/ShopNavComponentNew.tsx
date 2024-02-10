@@ -187,7 +187,8 @@ export const ShopNavComponentNew = ({
             <ul className="agri-ul widget-wrapper">
               {selectedTags.map((tag, index) => (
                 <li key={index}>
-                  <a
+                  <Link
+                    href={{}}
                     type="button"
                     style={{ textTransform: "capitalize" }}
                     onClick={() => handleRemoveTag(index)}
@@ -196,11 +197,12 @@ export const ShopNavComponentNew = ({
                     <span style={{ marginLeft: "10px", padding: "2px" }}>
                       x
                     </span>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
-            <a
+            <Link
+              href={{}}
               onClick={ () => handleRemoveTag(0)}
               style={{
                 marginTop: "5px",
@@ -210,7 +212,7 @@ export const ShopNavComponentNew = ({
               type="button"
             >
               Limpiar filtros
-            </a>
+            </Link>
           </div>
         )}
 
@@ -219,7 +221,7 @@ export const ShopNavComponentNew = ({
           (categoriesFhater && categoriesFhater.length > 0) ? (
             <>
               <li>
-                <a
+                <Link
                   href={`/${PATH_ROUTES.CATALOG_PATH}`}
                   className="d-flex flex-wrap justify-content-between"
                 >
@@ -227,7 +229,7 @@ export const ShopNavComponentNew = ({
                     <i className="icofont-double-right"></i>Ver Todos
                   </span>
                   {/* <span>({categories?.length ? categories?.length : 0 })</span> */}
-                </a>
+                </Link>
               </li>
               {categories && categories.length > 0
                 ? // Mapeo de categories
