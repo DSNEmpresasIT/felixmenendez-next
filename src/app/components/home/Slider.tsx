@@ -5,20 +5,20 @@ const Slider = () => {
 
   const dataSlider = [
     {
-      title: 'Alto rendimiento',
-      description: 'Maximizá tus resultados con insumos de calidad.',
+      title: 'Rendimiento óptimo',
+      description: 'Insumos de calidad.',
     },
     {
       title: 'Protección de cultivos',
-      description: 'Soluciones efectivas para requerimientos puntuales.',
+      description: 'Soluciones efectivas',
     },
     {
-      title: 'Cultivos saludables y productivos',
-      description: 'Productos de última generación.',
+      title: 'Cultivos saludables',
+      description: 'Productos avanzados.',
     },
     {
-      title: 'Soluciones Agropecuarias',
-      description: 'Somos la farmacia del campo.',
+      title: 'Félix Menéndez',
+      description: 'Nos vemos en tu campo.',
     },
   ]
 
@@ -34,7 +34,7 @@ const Slider = () => {
 									<div className="banner-item">
 										<div  className="banner-inner">
 											<div  className="banner-thumb">
-												<img   src={`/assets/images/blog/0${i+1}.jpg`} alt="banner-slider"/>
+												<img   src={`/assets/images/blog/${i+1}.png`} alt="banner-slider"/>
 											</div>
 											<div className="banner-content">
 												<h3></h3>
