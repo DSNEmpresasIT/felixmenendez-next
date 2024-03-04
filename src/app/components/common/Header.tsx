@@ -60,7 +60,7 @@ const Header = () => {
           <nav className="navbar navbar-expand-lg">
             <div className="primary-menu">
               <div className="logo">
-                <Link href={{ pathname: PATH_ROUTES.HOME_PATH }}>
+                <Link href={'/'}>
                   <img src="/assets/images/logo/01.png" alt="logo" />
                 </Link>
               </div>
@@ -106,7 +106,9 @@ const Header = () => {
                         </Link>
                         <ul className="agri-ul">
                           {categories.map((category) => (
-                            <li key={category.id}>
+                            <li key={category.id}
+                           
+                            >
                               {/* <Link href={`/${PATH_ROUTES.CATALOG_PATH}/?categoria=${category.category}`}> */}
                               <Link
                                 href={`/${PATH_ROUTES.CATALOG_PATH}/?type=${category.category}`}

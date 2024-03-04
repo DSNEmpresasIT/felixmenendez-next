@@ -53,16 +53,20 @@ export const CardCartComponent: FC<CardCartComponentProps> = ({ data }) => {
   return (
     <div
       key={data.id}
-      className="col-lg-4 col-md-6 col-12 animate__animated animate__fadeIn"
+      className="col-xl-4 col-md-6 col-12 animate__animated animate__fadeIn"
     >
       <div className="product-item rounded" style={{ minHeight: "28rem" }}>
         <Link
+          style={{display:'flex', aspectRatio:'4/3', alignItems:'center'}}
+         
           href={`/${PATH_ROUTES.PRODUCTS_PATH}?id=${data.id.toString()}&type=${
             data.type
           }&categoria=${data.filters}`}
         >
-          <div className="product-thumb">
-            <img className="rounded"
+          <div className="product-thumb w-full "
+          style={{width:'100%'}}>
+            <img 
+              style={{width:'100%', height:'100%', objectFit:'cover' }}
               src={data.img || `/assets/images/product/${image}/${image}.png`}
               alt="item"
             />
@@ -150,67 +154,6 @@ export const CardCartComponent: FC<CardCartComponentProps> = ({ data }) => {
             >
               <span>Cotizar</span>
             </button>
-          </div>
-        </div>
-      </div>
-      <div className="product-list-item">
-        <div className="product-thumb">
-          <img
-            src={data.img ?? `/assets/images/product/${image}/${image}.png`}
-            alt="item"
-          />
-          <div className="product-action-link">
-            <Link
-              href={`/${
-                PATH_ROUTES.PRODUCTS_PATH
-              }?id=${data.id.toString()}&type=${data.type}&categoria=${
-                data.filters
-              }`}
-            >
-              <i className="icofont-eye"></i>
-            </Link>
-          </div>
-        </div>
-        <div className="product-content row">
-          <div
-            className="col-12"
-            style={{ display: "flex", justifyContent: "space-between" }}
-          >
-            <span>{data.supplier?.name }</span>
-            <span style={{ textTransform: "capitalize", color: "#78bd41" }}>
-              {data.filters}
-            </span>
-          </div>
-
-          <h6>
-            <Link href="#">{data.name}</Link>
-          </h6>
-          {/* <p style={{ maxHeight: '100px', overflow: 'hidden', textOverflow: 'ellipsis' }}>{description}</p> */}
-          <div className="d-flex mt-3 justify-content-between">
-            <CardButton
-              id={data.id.toString()}
-              categoria={data.filters}
-              type={data.type}
-            />
-            {data.formulacion && (
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <span
-                  style={{
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                    overflow: "hidden",
-                  }}
-                >
-                  <strong>
-                    {data.is_active_substance
-                      ? "Principio Activo"
-                      : "Formulación"}
-                    :
-                  </strong>{" "}
-                  {data.formulacion}
-                </span>
-              </div>
-            )}
           </div>
         </div>
       </div>

@@ -68,9 +68,9 @@ const About_2 = () => {
             </div>
           </div>
         </div>
-        <div className="col-lg-6 col-12 wow fadeInUp" data-wow-delay="0.5s">
+        <div className="col-lg-6 col-12 wow fadeInUp " data-wow-delay="0.5s">
           <div className="product-right">
-            <div className="slider-product">
+            <div className="slider-product rounded-3">
               <div className="swiper-wrapper">
                 <div className="swiper-slide">
                   <div className="product-slider-item">

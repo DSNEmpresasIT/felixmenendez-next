@@ -34,7 +34,7 @@ const Slider = () => {
 									<div className="banner-item">
 										<div  className="banner-inner">
 											<div  className="banner-thumb">
-												<img   src={`/assets/images/blog/${i+1}.png`} alt="banner-slider"/>
+												<img style={{objectFit:'cover'}} src={`/assets/images/blog/${i+1}.png`} alt="banner-slider"/>
 											</div>
 											<div className="banner-content">
 												<h3></h3>

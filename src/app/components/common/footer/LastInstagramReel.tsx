@@ -12,12 +12,12 @@ export const LastInstagramReel = ({ INSTAGRAM_TOKEN }: { INSTAGRAM_TOKEN: string
       .catch(err => console.log(err))
   }, [INSTAGRAM_TOKEN])
   return (
-    <div style={{ width: '100%' }}>
+    <div className='w-full'>
       {
         lastReel 
         ? (
-          <a style={{ width: '90%' }} href={lastReel.permalink} target='_blank'>
-            <video width='100%' src={lastReel.media_url} loop muted autoPlay />
+          <a className='w-full' href={lastReel.permalink} target='_blank'>
+            <video width='100%' style={{borderRadius: '.375rem'}} src={lastReel.media_url} loop muted autoPlay />
           </a>
         )
         : (
