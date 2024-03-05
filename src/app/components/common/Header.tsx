@@ -60,9 +60,9 @@ const Header = () => {
           <nav className="navbar navbar-expand-lg">
             <div className="primary-menu">
               <div className="logo">
-                <Link href={'/'}>
+                <a href={'/'}>
                   <img src="/assets/images/logo/01.png" alt="logo" />
-                </Link>
+                </a>
               </div>
               <button
                 className="navbar-toggler"
@@ -101,20 +101,23 @@ const Header = () => {
                           pathname === PATH_ROUTES.CATALOG_PATH ? "active" : ""
                         }
                       >
-                        <Link href={`/${PATH_ROUTES.CATALOG_PATH}`}>
+                        <a type="button">
                           Productos
-                        </Link>
+                        </a>
                         <ul className="agri-ul">
                           {categories.map((category) => (
-                            <li key={category.id}
-                           
-                            >
-                              {/* <Link href={`/${PATH_ROUTES.CATALOG_PATH}/?categoria=${category.category}`}> */}
-                              <Link
+                            <li key={category.id}>
+                              {(pathname === '/') ? (  
+                              <a 
                                 href={`/${PATH_ROUTES.CATALOG_PATH}/?type=${category.category}`}
                               >
                                 {category.category}
-                              </Link>
+                              </a>) :( 
+                              <Link 
+                                href={`/${PATH_ROUTES.CATALOG_PATH}/?type=${category.category}`}
+                              >
+                                {category.category}
+                              </Link>)}
                             </li>
                           ))}
                         </ul>
