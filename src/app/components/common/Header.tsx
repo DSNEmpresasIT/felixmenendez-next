@@ -109,12 +109,12 @@ const Header = () => {
                             <li key={category.id}>
                               {(pathname === '/') ? (  
                               <a 
-                                href={`/${PATH_ROUTES.CATALOG_PATH}/?type=${category.category}`}
+                                href={`/${PATH_ROUTES.CATALOG_PATH}?type=${category.category}`}
                               >
                                 {category.category}
                               </a>) :( 
                               <Link 
-                                href={`/${PATH_ROUTES.CATALOG_PATH}/?type=${category.category}`}
+                                href={`/${PATH_ROUTES.CATALOG_PATH}?type=${category.category}`}
                               >
                                 {category.category}
                               </Link>)}
