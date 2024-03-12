@@ -1,7 +1,7 @@
 'use client'
 import { RelatedProductsSection } from '@/app/components/product-single/RelatedProductsSection';
 import NavDetails from '@/app/components/product-single/product-details/navDetails';
-import { getProductById } from '@/app/services/Supabase/product-services';
+import { getProductById, getProductByName } from '@/app/services/Supabase/product-services';
 import { getProductSingleById } from '@/app/services/Supabase/productSingle-service';
 import { PATH_ROUTES } from '@/app/util/pages';
 import { Product, ProductData, ProductSingle } from '@/app/util/types';
@@ -34,7 +34,7 @@ export interface ProductFeature {
 
 
 const page =() => {
-  const path  = useSearchParams().get("id");
+  const path  = useSearchParams().get("name");
   const type = useSearchParams().get("type");
   const categorie = useSearchParams().get("categoria")
   const [productSingle, setProductSingle] = useState<ProductFeature | null>(null);
@@ -44,8 +44,12 @@ const page =() => {
   const getProduct = async () => {
     try {
       
-        const productById = await getProductById(path as string);
-        setProduct(productById);
+        const productByName = await getProductByName(path as string);
+        if (productByName && productByName.length > 0) {
+          const selectedProduct = productByName[0]; // Por ejemplo, seleccionamos el primer producto de la lista
+          setProduct(selectedProduct);
+          console.log(selectedProduct);
+        }
         console.log(productSelected)
       
     } catch (error) {

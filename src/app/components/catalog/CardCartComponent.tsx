@@ -5,7 +5,7 @@ import Link from "next/link";
 import React, { FC, useEffect, useState } from "react";
 import { addToCart } from "../cart/cart-service";
 interface CardButtonProps {
-  id?: string;
+  name?: string;
   categoria: string | undefined;
   type: string | null;
 }
@@ -13,11 +13,11 @@ interface CardButtonProps {
 interface CardCartComponentProps {
   data: Product;
 }
-const CardButton: React.FC<CardButtonProps> = ({ id, categoria, type }) => (
+const CardButton: React.FC<CardButtonProps> = ({ name, categoria, type }) => (
   <Link
     href={{
       pathname: PATH_ROUTES.PRODUCTS_PATH,
-      query: { id, type, categoria },
+      query: { name, type, categoria },
     }}
     style={{
       width: "120px",
@@ -59,14 +59,15 @@ export const CardCartComponent: FC<CardCartComponentProps> = ({ data }) => {
         <Link
           style={{display:'flex', aspectRatio:'4/3', alignItems:'center'}}
          
-          href={`/${PATH_ROUTES.PRODUCTS_PATH}?id=${data.id.toString()}&type=${
+          href={`/${PATH_ROUTES.PRODUCTS_PATH}?name=${data.name?.toString()}&type=${
             data.type
           }&categoria=${data.filters}`}
         >
           <div className="product-thumb w-full "
-          style={{width:'100%'}}>
+          style={{width:'100%', height: '316px'}}>
             <img 
-              style={{width:'100%', height:'100%', objectFit:'cover' }}
+              className="h-100 "
+              style={{width:'100%' , objectFit:'cover', maxHeight: '316px', height: '100%' }}
               src={data.img || `/assets/images/product/${image}/${image}.png`}
               alt="item"
             />
@@ -101,7 +102,7 @@ export const CardCartComponent: FC<CardCartComponentProps> = ({ data }) => {
             <Link
               href={`/${
                 PATH_ROUTES.PRODUCTS_PATH
-              }?id=${data.id.toString()}&type=${data.type}&categoria=${
+              }?name=${data.name?.toString()}&type=${data.type}&categoria=${
                 data.filters
               }`}
             >
@@ -134,7 +135,7 @@ export const CardCartComponent: FC<CardCartComponentProps> = ({ data }) => {
           )}
           <div key={data.id} className="col-12 mt-1 d-flex gap-1 ">
             <CardButton
-              id={data.id.toString()}
+              name={data.name?.toString()}
               categoria={data.filters}
               type={data.type}
             />

@@ -27,8 +27,7 @@ export const ShopComponent:FC<ShopComponentProps> = ({ filter }) => {
     try {
         const productsByName = await getProductsByCategory(categorie);
       setProductData(productsByName);
-      console.log(productsByName , ' data nueva')
-      console.log(ProductData, 'product data')
+
     } catch (error) {
       console.error('Error fetching products:', error);
     }

@@ -101,7 +101,7 @@ const Header = () => {
                           pathname === PATH_ROUTES.CATALOG_PATH ? "active" : ""
                         }
                       >
-                        <a type="button">
+                        <a href={`/${PATH_ROUTES.CATALOG_PATH}`} type="button">
                           Productos
                         </a>
                         <ul className="agri-ul">

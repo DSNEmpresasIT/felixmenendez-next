@@ -221,7 +221,7 @@ export const ShopNavComponentNew = ({
           (categoriesFhater && categoriesFhater.length > 0) ? (
             <>
               <li>
-                <Link
+                <a
                   href={`/${PATH_ROUTES.CATALOG_PATH}`}
                   className="d-flex flex-wrap justify-content-between"
                 >
@@ -229,7 +229,7 @@ export const ShopNavComponentNew = ({
                     <i className="icofont-double-right"></i>Ver Todos
                   </span>
                   {/* <span>({categories?.length ? categories?.length : 0 })</span> */}
-                </Link>
+                </a>
               </li>
               {categories && categories.length > 0
                 ? // Mapeo de categories
