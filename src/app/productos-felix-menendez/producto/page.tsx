@@ -34,7 +34,7 @@ export interface ProductFeature {
 
 
 const page =() => {
-  const path  = useSearchParams().get("name");
+  const path  = useSearchParams().get("id");
   const type = useSearchParams().get("type");
   const categorie = useSearchParams().get("categoria")
   const [productSingle, setProductSingle] = useState<ProductFeature | null>(null);
@@ -44,12 +44,11 @@ const page =() => {
   const getProduct = async () => {
     try {
       
-        const productByName = await getProductByName(path as string);
-        if (productByName && productByName.length > 0) {
-          const selectedProduct = productByName[0]; // Por ejemplo, seleccionamos el primer producto de la lista
-          setProduct(selectedProduct);
-          console.log(selectedProduct);
-        }
+        const productById = await getProductById(path as string);
+     
+          setProduct(productById);
+        
+        
         console.log(productSelected)
       
     } catch (error) {

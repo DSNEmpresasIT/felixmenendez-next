@@ -8,15 +8,18 @@
   border-radius: 5px;
   box-shadow: 6px 9px 20px -9px rgba(0,0,0,0.1);
   flex-direction: column;
+  display: flex;
   height: 350px;
-  width: 460px;
+  width: 100%;
+  max-width: 460px;
   z-index: 100;
 }
 
 @media (max-width: 768px) {
   .productcart-container {
     top: 10%;
-    right: 5%;
+    right: 0;
+ 
   }
 }
 
@@ -28,13 +31,13 @@
   border-radius: 5px 5px 0px 0px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-
+  justify-content: space-between;
+  padding: 0px 10px;
 }
 
 .productcart-container-header .title-header {
   font-weight: 700;
-  font-size: 20px;
+  font-size: 30px;
 }
 
 .productcart-container-header .productcart-close-button {

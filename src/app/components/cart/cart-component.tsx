@@ -10,16 +10,20 @@ import {
 import Link from "next/link";
 import QuotationIcon from "../assets/quotationIcon";
 import phonesData from "@/app/util/data";
+import { CartItem } from "./cart-model";
 
 const Cart: React.FC<{
   isCartVisible: boolean;
   toggleCartVisibility: () => void;
-}> = ({ isCartVisible, toggleCartVisibility }) => {
+  onCartUpdate: (cart: CartItem[]) => void;
+}> = ({ isCartVisible, toggleCartVisibility, onCartUpdate }) => {
   const [cart, setCart] = useState(getCart());
 
   useEffect(() => {
     const updateCallback = () => {
-      setCart(getCart());
+      const updatedCart = getCart();
+      setCart(updatedCart);
+      onCartUpdate(updatedCart); 
     };
 
     registerUpdateCallback(updateCallback);
@@ -27,7 +31,7 @@ const Cart: React.FC<{
     return () => {
       registerUpdateCallback(() => {});
     };
-  }, []);
+  }, [onCartUpdate]);
 
   const handleRemoveFromCart = (productId: string) => {
     removeFromCart(productId);
@@ -55,10 +59,10 @@ const Cart: React.FC<{
     isCartVisible && (
       <div
         className="productcart-container animate__animated animate__fadeIn"
-        style={{ display: "flex" }}
+    
       >
-        <div className="productcart-container-header px-3 justify-content-between">
-          <h4 className="text-light text-sm" style={{ fontSize: "30px" }}>
+        <div className="productcart-container-header ">
+          <h4 className="text-light mb-0 title-header" >
             Cotización
           </h4>
           <button

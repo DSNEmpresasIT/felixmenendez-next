@@ -5,7 +5,7 @@ import Link from "next/link";
 import React, { FC, useEffect, useState } from "react";
 import { addToCart } from "../cart/cart-service";
 interface CardButtonProps {
-  name?: string;
+  id?: string;
   categoria: string | undefined;
   type: string | null;
 }
@@ -13,11 +13,11 @@ interface CardButtonProps {
 interface CardCartComponentProps {
   data: Product;
 }
-const CardButton: React.FC<CardButtonProps> = ({ name, categoria, type }) => (
+const CardButton: React.FC<CardButtonProps> = ({ id, categoria, type }) => (
   <Link
     href={{
       pathname: PATH_ROUTES.PRODUCTS_PATH,
-      query: { name, type, categoria },
+      query: { id, type, categoria },
     }}
     style={{
       width: "120px",
@@ -59,7 +59,7 @@ export const CardCartComponent: FC<CardCartComponentProps> = ({ data }) => {
         <Link
           style={{display:'flex', aspectRatio:'4/3', alignItems:'center'}}
          
-          href={`/${PATH_ROUTES.PRODUCTS_PATH}?name=${data.name?.toString()}&type=${
+          href={`/${PATH_ROUTES.PRODUCTS_PATH}?id=${data.id?.toString()}&type=${
             data.type
           }&categoria=${data.filters}`}
         >
@@ -102,7 +102,7 @@ export const CardCartComponent: FC<CardCartComponentProps> = ({ data }) => {
             <Link
               href={`/${
                 PATH_ROUTES.PRODUCTS_PATH
-              }?name=${data.name?.toString()}&type=${data.type}&categoria=${
+              }?id=${data.id?.toString()}&type=${data.type}&categoria=${
                 data.filters
               }`}
             >
@@ -135,7 +135,7 @@ export const CardCartComponent: FC<CardCartComponentProps> = ({ data }) => {
           )}
           <div key={data.id} className="col-12 mt-1 d-flex gap-1 ">
             <CardButton
-              name={data.name?.toString()}
+              id={data.id?.toString()}
               categoria={data.filters}
               type={data.type}
             />

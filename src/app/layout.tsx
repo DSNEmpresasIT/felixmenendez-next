@@ -8,7 +8,6 @@ import WhatsAppButtonComponent from '@/app/components/common/WhatsAppButtonCompo
 import BackToTop from '@/app/components/common/BackToTop';
 import BodyLayout from './BodyLayout';
 
-
 export default function RootLayout({children}:{children:React.ReactNode}) {
   return (
     <html lang="es">

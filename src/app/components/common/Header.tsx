@@ -7,15 +7,56 @@ import { usePathname } from "next/navigation";
 import { getCategoriesFathers } from "@/app/services/Supabase/category-services";
 import Cart from "../cart/cart-component";
 import QuotationIcon from "../assets/quotationIcon";
+import { getCart, registerUpdateCallback } from "../cart/cart-service";
+import { CartItem } from "../cart/cart-model";
 
 const Header = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [isBlackHeader, setIsBlackHeader] = useState(false);
   const pathname = usePathname();
   const [isCartVisible, setIsCartVisible] = useState(false);
+  const [cart, setCart] = useState(getCart());
 
   const toggleCartVisibility = () => {
     setIsCartVisible(!isCartVisible);
+  };
+
+  const QuotationToggle = () => {
+    return (
+      <>
+        <div className="d-flex align-items-center ">
+          <Link
+            className="d-flex align-items-center linkHover"
+            style={{ paddingRight: "3px", color: "white" }}
+            href={{}}
+            onClick={toggleCartVisibility}
+          >
+            Cotización
+            {/* <span className="align-items-top ms-1">
+                <QuotationIcon width="31" height="31" />
+                </span> */}
+          </Link>
+          {cart.length > 0 && (
+            <div
+              className="hover-effect d-flex justify-content-center  rounded-circle "
+              style={{
+                background: "#ffb11f",
+                width: "20px",
+                height: "20px",
+                alignItems: "center",
+              }}
+            >
+              <span
+                className="hover-effect text-white"
+                style={{ color: "white" }}
+              >
+                {cart.length}
+              </span>
+            </div>
+          )}
+        </div>
+      </>
+    );
   };
 
   const fetchCategories = async () => {
@@ -23,6 +64,11 @@ const Header = () => {
     if (categoriesData) {
       setCategories(categoriesData);
     }
+  };
+
+  const handleCartUpdate = (updatedCart: CartItem[]) => {
+    setCart(updatedCart);
+    console.log(cart);
   };
 
   useEffect(() => {
@@ -60,21 +106,27 @@ const Header = () => {
           <nav className="navbar navbar-expand-lg">
             <div className="primary-menu">
               <div className="logo">
-                <a href={'/'}>
-                  <img src="/assets/images/logo/01.png" alt="logo" />
+                <a href={"/"}>
+                  <img className="w-md-100 w-50" src="/assets/images/logo/01.png" alt="logo" />
                 </a>
               </div>
-              <button
-                className="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-              >
-                <i className="icofont-navigation-menu"></i>
-              </button>
+              <div className="d-flex " style={{gap: '12px'}}>
+                <div className="  quoter-break-point">
+                  <QuotationToggle/>
+                </div>
+
+                <button
+                  className="navbar-toggler"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                >
+                  <i className="icofont-navigation-menu"></i>
+                </button>
+              </div>
               <div
                 className="collapse navbar-collapse"
                 id="navbarSupportedContent"
@@ -107,17 +159,19 @@ const Header = () => {
                         <ul className="agri-ul">
                           {categories.map((category) => (
                             <li key={category.id}>
-                              {(pathname === '/') ? (  
-                              <a 
-                                href={`/${PATH_ROUTES.CATALOG_PATH}?type=${category.category}`}
-                              >
-                                {category.category}
-                              </a>) :( 
-                              <Link 
-                                href={`/${PATH_ROUTES.CATALOG_PATH}?type=${category.category}`}
-                              >
-                                {category.category}
-                              </Link>)}
+                              {pathname === "/" ? (
+                                <a
+                                  href={`/${PATH_ROUTES.CATALOG_PATH}?type=${category.category}`}
+                                >
+                                  {category.category}
+                                </a>
+                              ) : (
+                                <Link
+                                  href={`/${PATH_ROUTES.CATALOG_PATH}?type=${category.category}`}
+                                >
+                                  {category.category}
+                                </Link>
+                              )}
                             </li>
                           ))}
                         </ul>
@@ -185,17 +239,11 @@ const Header = () => {
                         </ul>
                       </li>
                       <li
-                        className={
-                          `${pathname === PATH_ROUTES.CONTACT_PATH ? "active" : ""} d-flex `
-                          
-                        }
+                        className={`${
+                          pathname === PATH_ROUTES.CONTACT_PATH ? "active" : ""
+                        } d-none d-lg-block  d-xl-block d-xxl-block`}
                       >
-                        <Link  href={{}} onClick={toggleCartVisibility}>
-                          Cotización
-                          {/* <span className="align-items-top ms-1">
-                          <QuotationIcon width="31" height="31" />
-                          </span> */}
-                        </Link>
+                        <QuotationToggle/>
                       </li>
                     </ul>
                   </div>
@@ -205,7 +253,11 @@ const Header = () => {
           </nav>
         </div>
       </div>
-      <Cart isCartVisible={isCartVisible} toggleCartVisibility={toggleCartVisibility}/>
+      <Cart
+        isCartVisible={isCartVisible}
+        onCartUpdate={handleCartUpdate}
+        toggleCartVisibility={toggleCartVisibility}
+      />
     </header>
   );
 };
