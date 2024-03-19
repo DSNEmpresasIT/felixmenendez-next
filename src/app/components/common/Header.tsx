@@ -158,17 +158,17 @@ const Header = () => {
                           {categories.map((category) => (
                             <li key={category.id}>
                               {pathname === "/" ? (
-                                <a
-                                  href={`/${PATH_ROUTES.CATALOG_PATH}?type=${category.category}`}
-                                >
-                                  {category.category}
-                                </a>
-                              ) : (
                                 <Link
                                   href={`/${PATH_ROUTES.CATALOG_PATH}?type=${category.category}`}
                                 >
                                   {category.category}
                                 </Link>
+                              ) : (
+                                <a
+                                  href={`/${PATH_ROUTES.CATALOG_PATH}?type=${category.category}`}
+                                >
+                                  {category.category}
+                                </a>
                               )}
                             </li>
                           ))}

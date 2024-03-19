@@ -26,7 +26,7 @@ export const ShopNavComponentNew = ({
   filters: string | undefined;
   productsLength: number;
 }) => {
-  const type: string | null = useSearchParams().get("type");
+ 
   const [categories, setCategories] = useState<Category[] | null>([]);
   const [categoriesFhater, setCategoriesFhater] = useState<Category[] | null>([]);
 
@@ -36,6 +36,8 @@ export const ShopNavComponentNew = ({
 
   const [selectedSubtype, setSelectedSubtype] = useState<ProductTypes | null>(null);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+
+  const [type, setType] = useState<string | null>(useSearchParams().get("type"));
 
   const showSubtypes =
     filters === ProductTypes.FERTILIZANTES ||
@@ -49,6 +51,9 @@ export const ShopNavComponentNew = ({
       }
     };
     
+    const getTypeParam=()=>{
+      setType(useSearchParams().get("type"))
+    }
 
 
   const handleClickCategory = (category: string | null, isName: boolean) => {
@@ -73,7 +78,6 @@ export const ShopNavComponentNew = ({
     setSelectedTags([filter])
     const categories = await getCategoriesChildren(filter);
     setCategories(categories);
-    console.log(filters);
 
     // brings all the products of the child categories by the father category
     const productsByFhaterCategory = await getProductByFhaterCategory(filter);
@@ -110,10 +114,11 @@ export const ShopNavComponentNew = ({
       resetFilters();
       removeQueryParam("type");
       removeQueryParam("categoria");
+      getTypeParam()
     } else if (isSubCategory) {
-      resetFilters();
-      removeQueryParam("type");
-    } else {
+  
+      removeQueryParam("categoria");
+    
       const updatedTags = selectedTags.filter((_, i) => i !== index);
       setSelectedTags(updatedTags);
       updateFilteredData();
@@ -153,6 +158,7 @@ export const ShopNavComponentNew = ({
       // filterCategoryByFormulacion(filters);
       setTags(filters)
     } else if (type) {
+      console.log(type)
       getChilCategory(type);
       if (!selectedTags.includes(type)) {
         setSelectedTags([type])

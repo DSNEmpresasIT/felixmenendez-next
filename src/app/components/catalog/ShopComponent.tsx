@@ -101,6 +101,7 @@ export const ShopComponent:FC<ShopComponentProps> = ({ filter }) => {
                     dataPaginate?.map((data, i) => {
                       return (
                         < CardCartComponent
+                          key={i}
                           data={data}        
                         />
                       )
