@@ -1,0 +1,41 @@
+/* Custom css */
+
+.quoter-mobile{
+  display: flex!important;
+}
+
+@media  (min-width: 992px){
+  .quoter-mobile {
+    display: none !important;
+  }
+}
+
+.quoter-desktop{
+  display: none!important;
+}
+
+@media (min-width: 992px){
+  .quoter-desktop{
+    display: flex;
+  }
+}
+
+.custom-link {
+  color:white !important;
+  cursor: pointer!important;
+}
+
+.custom-link:hover {
+  color: #ffb11f !important;
+}
+
+.logo-size-bp{
+  width: 7rem;
+}
+
+@media (min-width: 992px){
+  .logo-size-bp{
+    width: 100%!important;
+  }
+}
+

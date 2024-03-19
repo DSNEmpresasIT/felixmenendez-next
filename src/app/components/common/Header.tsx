@@ -1,15 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { PAGES, PATH_ROUTES } from "@/app/util/pages";
-import { Category, ProductTypes } from "@/app/util/types";
+import {  PATH_ROUTES } from "@/app/util/pages";
+import { Category,  } from "@/app/util/types";
 import { usePathname } from "next/navigation";
 import { getCategoriesFathers } from "@/app/services/Supabase/category-services";
 import Cart from "../cart/cart-component";
-import QuotationIcon from "../assets/quotationIcon";
-import { getCart, registerUpdateCallback } from "../cart/cart-service";
+import { getCart } from "../cart/cart-service";
 import { CartItem } from "../cart/cart-model";
-
 const Header = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [isBlackHeader, setIsBlackHeader] = useState(false);
@@ -25,17 +23,17 @@ const Header = () => {
     return (
       <>
         <div className="d-flex align-items-center ">
-          <Link
-            className="d-flex align-items-center linkHover"
-            style={{ paddingRight: "3px", color: "white" }}
-            href={{}}
+          <a
+            className="d-flex align-items-center custom-link"
+            style={{ paddingRight: "3px" }}
+         
             onClick={toggleCartVisibility}
           >
             Cotización
             {/* <span className="align-items-top ms-1">
                 <QuotationIcon width="31" height="31" />
                 </span> */}
-          </Link>
+          </a>
           {cart.length > 0 && (
             <div
               className="hover-effect d-flex justify-content-center  rounded-circle "
@@ -107,11 +105,11 @@ const Header = () => {
             <div className="primary-menu">
               <div className="logo">
                 <a href={"/"}>
-                  <img className="w-md-100 w-50" src="/assets/images/logo/01.png" alt="logo" />
+                  <img className="logo-size-bp" src="/assets/images/logo/01.png" alt="logo" />
                 </a>
               </div>
               <div className="d-flex " style={{gap: '12px'}}>
-                <div className="  quoter-break-point">
+                <div className="quoter-mobile">
                   <QuotationToggle/>
                 </div>
 
@@ -241,7 +239,7 @@ const Header = () => {
                       <li
                         className={`${
                           pathname === PATH_ROUTES.CONTACT_PATH ? "active" : ""
-                        } d-none d-lg-block  d-xl-block d-xxl-block`}
+                        } quoter-desktop`}
                       >
                         <QuotationToggle/>
                       </li>

@@ -5075,20 +5075,3 @@ ul.agri-ul li {
   visibility: visible;
 }
 
-/* Custom css */
-
-.quoter-break-point{
-  display: flex;
- 
-}
-
-@media  (min-width: 992px){
-  .quoter-break-point {
-    display: none !important;
-  }
-}
-
-.linkHover:hover {
-  color: #ffb11f !important;
-
-}
