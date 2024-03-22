@@ -50,7 +50,7 @@ const Cart: React.FC<{
       .map((item) => `${item.product.name}: ${item.quantity} unidades.`)
       .join("\n");
     const initialMessage =
-      "Hola, te hablo desde la página web. Me gustaría consultar la cotización de los siguientes productos:\n\n";
+      "Me gustaría consultar la cotización de los siguientes productos:\n\n";
     const fullMessage = initialMessage + cartMessage;
     return encodeURIComponent(fullMessage);
   };

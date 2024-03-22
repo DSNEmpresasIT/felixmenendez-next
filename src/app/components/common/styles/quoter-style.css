@@ -16,7 +16,7 @@
 
 @media (min-width: 992px){
   .quoter-desktop{
-    display: flex;
+    display: flex!important;
   }
 }
 
