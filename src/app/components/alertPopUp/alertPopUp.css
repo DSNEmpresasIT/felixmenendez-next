@@ -1,0 +1,19 @@
+#modalTest {
+  left: 5%!important;
+  top:25%!important;
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Asegúrate de que el z-index sea mayor que cualquier otro elemento en la página */
+}
+
+@media (min-width: 695px){
+  #modalTest{
+    position: fixed!important;
+  top: 50%!important;
+  left: 50%!important;
+  transform: translate(-50%, -50%)!important;
+  }
+}

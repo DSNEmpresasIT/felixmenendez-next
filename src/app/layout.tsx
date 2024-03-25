@@ -2,13 +2,14 @@ import 'animate.css';
 import '@/app/components/assets/paginationBlogPosts.css';
 import '@/app/components/cart/cart-styles.css';
 import '@/app/components/common/styles/quoter-style.css'
+import '@/app/components/alertPopUp/alertPopUp.css';
 import React from 'react';
 import Header from '@/app/components/common/Header';
 import Footer from '@/app/components/common/Footer';
 import WhatsAppButtonComponent from '@/app/components/common/WhatsAppButtonComponent';
 import BackToTop from '@/app/components/common/BackToTop';
 import BodyLayout from './BodyLayout';
-
+import AlertPopUp from './components/alertPopUp/alertPopUp';
 export default function RootLayout({children}:{children:React.ReactNode}) {
   return (
     <html lang="es">
@@ -31,6 +32,8 @@ export default function RootLayout({children}:{children:React.ReactNode}) {
           <BodyLayout>
             <Header />
             {children}
+            <AlertPopUp/>
+
             <Footer />
             <WhatsAppButtonComponent />
             <BackToTop />
