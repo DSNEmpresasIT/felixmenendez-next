@@ -38,10 +38,10 @@ const AlertPopUp = () => {
       <div className="lab-btn " onClick={switchModalTest}><span>Cerrar</span></div>
      </div>
       <h3 className="text-warning text-center p-2">
-        ¡Estamos cerrados temporalmente!
+        Cerrado del 28 de marzo al 2 de abril
       </h3>
       <p className="text-center">
-        ¡cerramos del 28 de marzo al 2 de abril! Por favor, vuelva más tarde.
+      Les deseamos unas muy felices Pascuas Félix Menendez S.R.L
       </p>
       <div>
       <img
