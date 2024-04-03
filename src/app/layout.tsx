@@ -32,8 +32,7 @@ export default function RootLayout({children}:{children:React.ReactNode}) {
           <BodyLayout>
             <Header />
             {children}
-            <AlertPopUp/>
-
+            {/* <AlertPopUp/> */}
             <Footer />
             <WhatsAppButtonComponent />
             <BackToTop />
