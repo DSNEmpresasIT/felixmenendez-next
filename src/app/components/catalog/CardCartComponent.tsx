@@ -16,7 +16,7 @@ interface CardCartComponentProps {
 const CardButton: React.FC<CardButtonProps> = ({ id, categoria, type }) => (
   <Link
     href={{
-      pathname: PATH_ROUTES.PRODUCTS_PATH,
+      pathname: `/${PATH_ROUTES.PRODUCTS_PATH}`,
       query: { id, type, categoria },
     }}
     style={{
