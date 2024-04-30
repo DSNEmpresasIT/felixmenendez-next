@@ -75,45 +75,45 @@ const About_2 = () => {
                 <div className="swiper-slide">
                   <div className="product-slider-item">
                     <div className="product-slider-thumb">
-                      <img src="assets/images/product/home3/01.jpg" alt="slider-product"/>
+                      <img style={{objectFit: 'cover', minHeight:'600px' , maxHeight: '600px'}} src="assets/images/product/home3/slider/1.jpeg" alt="slider-product"/>
                     </div>
                   </div>
                 </div>
                 <div className="swiper-slide">
                   <div className="product-slider-item">
                     <div className="product-slider-thumb">
-                      <img src="assets/images/product/home3/02.jpg" alt="slider-product"/>
+                      <img style={{objectFit: 'cover', minHeight:'600px' , maxHeight: '600px'}} src="assets/images/product/home3/slider/2.jpeg" alt="slider-product"/>
                     </div>
                   </div>
                 </div>
                 <div className="swiper-slide">
                   <div className="product-slider-item">
                     <div className="product-slider-thumb">
-                      <img src="assets/images/product/home3/03.jpg" alt="slider-product"/>
+                      <img style={{objectFit: 'cover',minHeight:'600px' , maxHeight: '600px'}} src="assets/images/product/home3/slider/3.jpeg" alt="slider-product"/>
+                    </div>
+                  </div>
+                </div>
+                {/* <div className="swiper-slide">
+                  <div className="product-slider-item">
+                    <div className="product-slider-thumb">
+                      <img style={{objectFit: 'cover', maxHeight: '600px'}} src="assets/images/product/home3/slider/4.jpeg" alt="slider-product"/>
                     </div>
                   </div>
                 </div>
                 <div className="swiper-slide">
                   <div className="product-slider-item">
                     <div className="product-slider-thumb">
-                      <img src="assets/images/product/home3/04.jpg" alt="slider-product"/>
+                      <img style={{objectFit: 'cover', maxHeight: '600px'}} src="assets/images/product/home3/slider/5.jpeg" alt="slider-product"/>
                     </div>
                   </div>
                 </div>
                 <div className="swiper-slide">
                   <div className="product-slider-item">
                     <div className="product-slider-thumb">
-                      <img src="assets/images/product/home3/05.jpg" alt="slider-product"/>
+                      <video autoPlay={true} muted={true} style={{objectFit: 'cover', maxHeight: '600px', minWidth: '600px'}}  src="assets/images/product/home3/slider/video_1.mp4" />
                     </div>
                   </div>
-                </div>
-                <div className="swiper-slide">
-                  <div className="product-slider-item">
-                    <div className="product-slider-thumb">
-                      <img src="assets/images/product/home3/06.jpg" alt="slider-product"/>
-                    </div>
-                  </div>
-                </div>
+                </div>  */}
               </div>
             </div>
             <div className="slider-product-pagination text-center"></div>
