@@ -93,6 +93,20 @@ const About_2 = () => {
                     </div>
                   </div>
                 </div>
+                <div className="swiper-slide">
+                  <div className="product-slider-item">
+                    <div className="product-slider-thumb">
+                      <img style={{objectFit: 'cover',minHeight:'600px' , maxHeight: '600px'}} src="assets/images/product/home3/slider/4.jpeg" alt="slider-product"/>
+                    </div>
+                  </div>
+                </div>
+                <div className="swiper-slide">
+                  <div className="product-slider-item">
+                    <div className="product-slider-thumb">
+                      <img style={{objectFit: 'cover',minHeight:'600px' , maxHeight: '600px'}} src="assets/images/product/home3/slider/5.jpeg" alt="slider-product"/>
+                    </div>
+                  </div>
+                </div>
                 {/* <div className="swiper-slide">
                   <div className="product-slider-item">
                     <div className="product-slider-thumb">
